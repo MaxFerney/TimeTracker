@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 
 export const Hello = () => {
-  const [counter, setCounter] = useState(0);
 
-  const increment = () => {
-    setCounter(counter + 1);
-  };
+    const[counter, setCounter] = useState(Math.floor(Date.now() / 1000 ));
 
-  return (
-    <div>
-      <button onClick={increment}>Click Me</button>
-      <p>You've pressed the button {counter} times.</p>
-    </div>
-  );
+    setInterval(() => {
+      setCounter(Math.floor(Date.now() / 1000 ));
+      console.log(counter);
+    }, 1000);
+
+    return (
+        <div>
+          <p>Current Unix Time: {counter} </p>
+        </div>
+    );
 };
