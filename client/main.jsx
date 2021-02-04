@@ -6,7 +6,7 @@ import {TimeCollection} from '/imports/api/links.js';
 
 import App from './../imports/ui/App.jsx';
 Meteor.startup(() => {
-    // Tracker.autorun(()=>{
+    Tracker.autorun(()=>{
         const dbTimes = TimeCollection.find().fetch();
         let startTime = 0;
         let stopTime = 0;
@@ -22,5 +22,5 @@ Meteor.startup(() => {
             passedCurrentObject={currentObject}
             passedCounter={counter}/>,
             document.getElementById('react-target'));
-    // });
+    });
 });

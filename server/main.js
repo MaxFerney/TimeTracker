@@ -11,25 +11,35 @@ function insertLink({ title, url }) {
 
 Meteor.startup(() => {
   // If the Links collection is empty, add some data.
-    if (LinksCollection.find().count() === 0) {
-        insertLink({
-            title: 'Do the Tutorial',
-            url: 'https://www.meteor.com/tutorials/react/creating-an-app'
-        });
+    Tracker.autorun(()=>{
 
-        insertLink({
-            title: 'Follow the Guide',
-            url: 'http://guide.meteor.com'
-        });
+        if (LinksCollection.find().count() === 0) {
+            insertLink({
+                title: 'Do the Tutorial',
+                url: 'https://www.meteor.com/tutorials/react/creating-an-app'
+            });
 
-        insertLink({
-            title: 'Read the Docs',
-            url: 'https://docs.meteor.com'
-        });
+            insertLink({
+                title: 'Follow the Guide',
+                url: 'http://guide.meteor.com'
+            });
 
-        insertLink({
-            title: 'Discussions',
-            url: 'https://forums.meteor.com'
-        });
-    }
+            insertLink({
+                title: 'Read the Docs',
+                url: 'https://docs.meteor.com'
+            });
+
+            insertLink({
+                title: 'Discussions',
+                url: 'https://forums.meteor.com'
+            });
+        }
+        if (TimeCollection.find().count() === 0) {
+            insertTime({
+                start: 'test time',
+                stop: 'test stop'
+            });
+        }
+    
+    });
 });
