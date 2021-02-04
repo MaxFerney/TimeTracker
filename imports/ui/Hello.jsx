@@ -5,9 +5,13 @@ export const Hello = () => {
     const[counter, setCounter] = useState(Math.floor(Date.now() / 1000 ));
     const[startTime, setStartTime] = useState("Not Started");
     const[stopTime, setStopTime] = useState("Not Stopped");
+    const[elapsedTime, setElapsedTime] = useState(0);
 
     const[timerStarted, setTimerStarted] = useState("false");
 
+    //if (timerStarted == "true") {
+    //    setElapsedTime(counter - startTime);
+    //}
 
     setInterval(() => {
       setCounter(Math.floor(Date.now() / 1000 ));
@@ -25,6 +29,7 @@ export const Hello = () => {
             console.log(timerStarted);
 
             setStopTime(counter);
+            setElapsedTime(stopTime - startTime);
 
             setTimerStarted("false");
         }
@@ -32,6 +37,7 @@ export const Hello = () => {
 
     return (
         <div>
+        <p>Time Passed: {elapsedTime} </p>
           <p>Current Unix Time: {counter} </p>
           <button onClick={getTime}>
             Get Time
