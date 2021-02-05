@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Component } from 'react';
 
 export const Hello = () => {
 
@@ -9,13 +9,16 @@ export const Hello = () => {
 
     const[timerStarted, setTimerStarted] = useState("false");
 
-    //if (timerStarted == "true") {
-    //    setElapsedTime(counter - startTime);
-    //}
-
+/*
     setInterval(() => {
-      setCounter(Math.floor(Date.now() / 1000 ));
+        setCounter(Math.floor(Date.now() / 1000 ));
+
+        console.log(counter);
+
+        setElapsedTime(counter - startTime);
+
     }, 1000);
+*/
 
     function getTime() {
         if(timerStarted == "false") {
@@ -29,7 +32,6 @@ export const Hello = () => {
             console.log(timerStarted);
 
             setStopTime(counter);
-            setElapsedTime(stopTime - startTime);
 
             setTimerStarted("false");
         }
