@@ -8,8 +8,6 @@ export const Hello = () => {
     const[elapsedTime, setElapsedTime] = useState(0);
 
     const[timerStarted, setTimerStarted] = useState("false");
-    
-    const[buttonText, setButtonText] = useState("Start");
 
     function getTime() {
         if(timerStarted == "false") {
@@ -17,7 +15,6 @@ export const Hello = () => {
 
             setStartTime(counter);
             setStopTime("Not Stopped");
-            setButtonText("Stop");
 
             setTimerStarted("true");
         } else {
@@ -26,7 +23,6 @@ export const Hello = () => {
             setStopTime(counter);
 
             setTimerStarted("false");
-            setButtonText("Start");
         }
     }
 
@@ -34,7 +30,7 @@ export const Hello = () => {
         <div>
             <p>Time Passed: {elapsedTime} </p>
             <button onClick={getTime}>
-                {buttonText}
+                Get Time
             </button>
             <p>Start Time: {startTime}</p>
             <p>Stop Time: {stopTime}</p>
