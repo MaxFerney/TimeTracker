@@ -1,4 +1,6 @@
 import React, { useState, Component } from 'react';
+import PropTypes from 'prop-types';
+import { TimeCollection } from '/imports/api/timeCollection';
 
 export const Hello = () => {
 
@@ -8,7 +10,7 @@ export const Hello = () => {
     const[elapsedTime, setElapsedTime] = useState(0);
 
     const[timerStarted, setTimerStarted] = useState("false");
-    
+
     const[buttonText, setButtonText] = useState("Start");
 
     function getTime() {

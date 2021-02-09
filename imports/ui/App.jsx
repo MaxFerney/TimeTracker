@@ -1,6 +1,7 @@
 import React from 'react';
 import { Hello } from './Hello.jsx';
 import { Info } from './Info.jsx';
+import PropTypes from 'prop-types';
 
 var currentTime;
 
@@ -49,5 +50,3 @@ class Clock extends React.Component {
     );
   }
 }
-
-
