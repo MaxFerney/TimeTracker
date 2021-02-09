@@ -1,4 +1,5 @@
 import React, { useState, Component } from 'react';
+import { TimesCollectionAccess } from './../../lib/times.js';
 
 export const App = () => (
   <div>
@@ -10,6 +11,8 @@ var timerStarted = false; //Eventually pull from DB
 var startTime;
 var endTime;
 var currentTime;
+var timeObject;
+// var timeObjectID;
 var elapsedTime = 0; //Eventually pull from DB
 
 buttonText = "Start"; //Eventually pull from DB
@@ -20,11 +23,34 @@ function getTime() {
     startTime = currentTime;
     endTime = "Waiting..."
     buttonText = "Stop";
+    // timeObject = {
+    //     start_time: currentTime,
+    //     stop_time: -1,
+    //     is_active: "true",
+    // };
+    // TimesCollectionAccess.insert(timeObject, function(err){
+    //     if (err) return;
+    //     //successfully inputs item
+    //     timeObjectID = timeObject._id;
+    // });
+    TimesCollectionAccess.insert({
+        start_time: currentTime,
+        stop_time: -1,
+        is_active: "true",
+    });
     timerStarted = true;
   } else {
     endTime = currentTime;
+    timeObject = TimesCollectionAccess.findOne({is_active:"true"})
+    console.log("ENTIRE DB\n\n"+TimesCollectionAccess.find().fetch());
+    TimesCollectionAccess.update({_id:timeObject._id},{
+        $set:{
+        stop_time:currentTime,
+        is_active:"false",
+    }});
     buttonText = "Start";
     timerStarted = false;
+    console.log(TimesCollectionAccess.find().fetch());
   }
 }
 
@@ -81,5 +107,3 @@ class Clock extends React.Component {
     );
   }
 }
-
-
