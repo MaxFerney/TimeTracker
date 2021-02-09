@@ -5,7 +5,14 @@ import { Meteor } from 'meteor/meteor';
 import {TimeCollection} from '/imports/api/links.js';
 
 import App from './../imports/ui/App.jsx';
+
+var connectHandler = WebApp.connectHandlers;
+
 Meteor.startup(() => {
+    connectHandler.use(function (req, res, next) {
+      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:12632'); //allow access
+      return next();
+    })
     Tracker.autorun(()=>{
         const dbTimes = TimeCollection.find().fetch();
         let startTime = 0;
