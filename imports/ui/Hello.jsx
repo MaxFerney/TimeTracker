@@ -8,17 +8,8 @@ export const Hello = () => {
     const[elapsedTime, setElapsedTime] = useState(0);
 
     const[timerStarted, setTimerStarted] = useState("false");
-
-/*
-    setInterval(() => {
-        setCounter(Math.floor(Date.now() / 1000 ));
-
-        console.log(counter);
-
-        setElapsedTime(counter - startTime);
-
-    }, 1000);
-*/
+    
+    const[buttonText, setButtonText] = useState("Start");
 
     function getTime() {
         if(timerStarted == "false") {
@@ -26,6 +17,7 @@ export const Hello = () => {
 
             setStartTime(counter);
             setStopTime("Not Stopped");
+            setButtonText("Stop");
 
             setTimerStarted("true");
         } else {
@@ -34,18 +26,18 @@ export const Hello = () => {
             setStopTime(counter);
 
             setTimerStarted("false");
+            setButtonText("Start");
         }
     }
 
     return (
         <div>
-        <p>Time Passed: {elapsedTime} </p>
-          <p>Current Unix Time: {counter} </p>
-          <button onClick={getTime}>
-            Get Time
-          </button>
-          <p>Start Time: {startTime}</p>
-          <p>Stop Time: {stopTime}</p>
+            <p>Time Passed: {elapsedTime} </p>
+            <button onClick={getTime}>
+                {buttonText}
+            </button>
+            <p>Start Time: {startTime}</p>
+            <p>Stop Time: {stopTime}</p>
         </div>
     );
 };

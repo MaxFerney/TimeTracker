@@ -2,6 +2,8 @@ import React from 'react';
 import { Hello } from './Hello.jsx';
 import { Info } from './Info.jsx';
 
+var currentTime;
+
 export const App = () => (
   <div>
     <Clock/>
@@ -10,9 +12,8 @@ export const App = () => (
   </div>
 );
 
-
 function FormattedDate(props) {
-  var currentTime = Math.floor(props.date.getTime()/1000);
+  currentTime = Math.floor(props.date.getTime()/1000);
   return <h2>It is {currentTime}.</h2>;
 }
 
