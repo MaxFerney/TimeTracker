@@ -1,28 +1,29 @@
 import React, { useState, Component } from 'react';
-import { Info } from './Info.jsx';
-
 
 export const App = () => (
   <div>
     <Clock/>
-    <Info/>
   </div>
 );
 
-var timerStarted = false;
+var timerStarted = false; //Eventually pull from DB
 var startTime;
 var endTime;
 var currentTime;
-var elapsedTime;
+var elapsedTime = 0; //Eventually pull from DB
+
+buttonText = "Start"; //Eventually pull from DB
 
 
 function getTime() {
   if (timerStarted == false) {
     startTime = currentTime;
     endTime = "Waiting..."
+    buttonText = "Stop";
     timerStarted = true;
   } else {
     endTime = currentTime;
+    buttonText = "Start";
     timerStarted = false;
   }
 }
@@ -31,8 +32,10 @@ function FormattedDate(props) {
   currentTime = Math.floor(props.date.getTime()/1000);
   if(timerStarted == true) {
     elapsedTime = currentTime - startTime;
-  } else {
+  } else if(endTime) {
     elapsedTime = endTime - startTime;
+  } else {
+    elapsedTime = 0; //Eventually Pull from DB
   }
   return (
     <div>
@@ -41,7 +44,7 @@ function FormattedDate(props) {
       <p>Start Time: {startTime}</p>
       <p>Stop time: {endTime}</p>
       <button onClick={getTime}>
-          Get Time
+          {buttonText}
       </button>
     </div>
   );
