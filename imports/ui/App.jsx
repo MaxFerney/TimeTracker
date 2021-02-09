@@ -1,4 +1,5 @@
 import React, { useState, Component } from 'react';
+import moment from 'moment';
 
 export const App = () => (
   <div>
@@ -39,7 +40,7 @@ function FormattedDate(props) {
   }
   return (
     <div>
-      <h2>It is {currentTime}.</h2>
+      <h2>{moment().format('LTS')}</h2>
       <p>Elapsed Time = {elapsedTime}</p>
       <p>Start Time: {startTime}</p>
       <p>Stop time: {endTime}</p>
