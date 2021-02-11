@@ -42,7 +42,6 @@ function FormattedDate(props) {
     <div id="homeTimer">
       <h2>Welcome Back <br/> <span id="userName">User X</span></h2>
       <h2>{moment().format('LTS')}</h2>
-      <p>Elasped Time</p>
       <h1>{elapsedTime}</h1>
       <button id="startStopBtn" class="dropShadow" onClick={getTime}>
           {buttonText}
