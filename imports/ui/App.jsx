@@ -45,10 +45,10 @@ function FormattedDate(props) {
       <p>Elapsed Time = {elapsedTime}</p>
       <p>Start Time: {startTime}</p>
       <p>Stop time: {endTime}</p>
-      <button id="startStopBtn" onClick={getTime}>
+      <button id="startStopBtn" class="dropShadow" onClick={getTime}>
           {buttonText}
       </button>
-      <button id="manuallyInsertBtn" onclick="">
+      <button id="manuallyInsertBtn" class="dropShadow" onclick="">
         Manually Insert Time
       </button>
     </div>

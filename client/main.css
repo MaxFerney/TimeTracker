@@ -1,5 +1,11 @@
+@import 'classes';
+
 body {
   font-family: sans-serif;
+
+  height: 100vh;
+
+  background: linear-gradient(#FFFFFF, #E1E1E1)
 }
 
 header, footer { /* Sets header and footer to be 50px tall locked at top and bottom with centered content */
@@ -73,17 +79,34 @@ footer {
 
 footer > ul {
   list-style: none;
-  padding-left: 0px
+  padding-left: 0px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-footer > ul > a {
+footer > ul > li {
+  display: inline-block;
+  margin: 0px 30px;
+}
+
+footer > ul > li > a {
   text-decoration: none;
   color: white;
   padding: 0px;
   margin: 0px;
 }
 
-footer > ul > a > li {
-  display: inline-block;
-  margin: 0px 20px;
+footer > ul > li:nth-of-type(1) > a > img {
+  height: 35px;
+  width: 35px;
+}
+footer > ul > li:nth-of-type(2) > a > img {
+  height: 30px;
+  width: 30px;
+}
+footer > ul > li:nth-of-type(3) > a > img {
+  height: 45px;
+  width: 45px;
 }
