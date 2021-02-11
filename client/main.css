@@ -1,4 +1,89 @@
 body {
-  padding: 10px;
   font-family: sans-serif;
+}
+
+header, footer { /* Sets header and footer to be 50px tall locked at top and bottom with centered content */
+  position: fixed;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 50px;
+
+  background-color: #660000;
+}
+
+header {
+  top: 0;
+  color: white;
+}
+
+header > h2 {
+  font-size: 25px;
+  font-weight: 400;
+}
+
+#react-target {
+  margin: 75px 0px;
+  text-align: center;
+}
+
+#homeTimer > h2:nth-of-type(1) {
+  font-size: 25px;
+  font-weight: 400;
+}
+
+#homeTimer > h2:nth-of-type(1) > span {
+  font-size: 36px;
+  font-weight: 500;
+}
+
+button {
+  display: block;
+  padding: 20px 0px;
+  margin: 10px auto;
+  
+  border: none;
+  border-radius: 10px;
+
+  color: white;
+  
+  width: 210px;
+}
+
+#startStopBtn {
+  background-color: #007680;
+
+  font-size: 36px;
+}
+
+#manuallyInsertBtn {
+  font-size: 20px;
+  padding: 10px 0px;
+
+  background-color: #8B7E7A;
+}
+
+footer {
+  bottom: 0;
+}
+
+footer > ul {
+  list-style: none;
+  padding-left: 0px
+}
+
+footer > ul > a {
+  text-decoration: none;
+  color: white;
+  padding: 0px;
+  margin: 0px;
+}
+
+footer > ul > a > li {
+  display: inline-block;
+  margin: 0px 20px;
 }

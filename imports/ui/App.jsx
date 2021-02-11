@@ -39,13 +39,17 @@ function FormattedDate(props) {
     elapsedTime = 0; //Eventually Pull from DB
   }
   return (
-    <div>
+    <div id="homeTimer">
+      <h2>Welcome Back <br/> <span id="userName">User X</span></h2>
       <h2>{moment().format('LTS')}</h2>
       <p>Elapsed Time = {elapsedTime}</p>
       <p>Start Time: {startTime}</p>
       <p>Stop time: {endTime}</p>
-      <button onClick={getTime}>
+      <button id="startStopBtn" onClick={getTime}>
           {buttonText}
+      </button>
+      <button id="manuallyInsertBtn" onclick="">
+        Manually Insert Time
       </button>
     </div>
   );
