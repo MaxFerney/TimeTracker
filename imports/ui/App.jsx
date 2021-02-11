@@ -11,7 +11,7 @@ var timerStarted = false; //Eventually pull from DB
 var startTime;
 var endTime;
 var currentTime;
-var elapsedTime = 0; //Eventually pull from DB
+var elapsedTime = "00:00:00"; //Eventually pull from DB
 
 buttonText = "Start"; //Eventually pull from DB
 
@@ -36,15 +36,14 @@ function FormattedDate(props) {
   } else if(endTime) {
     elapsedTime = endTime - startTime;
   } else {
-    elapsedTime = 0; //Eventually Pull from DB
+    elapsedTime = "00:00:00"; //Eventually Pull from DB
   }
   return (
     <div id="homeTimer">
       <h2>Welcome Back <br/> <span id="userName">User X</span></h2>
       <h2>{moment().format('LTS')}</h2>
-      <p>Elapsed Time = {elapsedTime}</p>
-      <p>Start Time: {startTime}</p>
-      <p>Stop time: {endTime}</p>
+      <p>Elasped Time</p>
+      <h1>{elapsedTime}</h1>
       <button id="startStopBtn" class="dropShadow" onClick={getTime}>
           {buttonText}
       </button>
