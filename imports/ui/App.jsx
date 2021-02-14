@@ -89,7 +89,6 @@ class Clock extends React.Component {
       () => this.tick(),
       100
     );
-    console.log('tick');
   }
 
   componentWillUnmount() {
