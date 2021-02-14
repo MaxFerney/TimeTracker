@@ -105,6 +105,7 @@ function pushTimerBtn() {
   $('#manuallyInsertBtn').fadeToggle();
 
   if (timerStarted == false) {
+    $('#startStopBtn').removeClass('greenBG').addClass('redBG');
     startTime = currentTime;
     endTime = "Waiting..."
     buttonText = "Stop";
@@ -114,9 +115,9 @@ function pushTimerBtn() {
       stop_time: 0,
       is_active: true
     });
-    $('#startStopBtn').removeClass('greenBG').addClass('redBG');
 
   } else {
+    $('#startStopBtn').removeClass('redBG').addClass('greenBG');
     endTime = currentTime;
     buttonText = "Start";
     timerStarted = false;
@@ -149,10 +150,6 @@ function pushTimerBtn() {
         "is_active: "+cursorItem.is_active+"\n]"
       )
     });
-
-
-
-    $('#startStopBtn').removeClass('redBG').addClass('greenBG');
   }
 }
 
