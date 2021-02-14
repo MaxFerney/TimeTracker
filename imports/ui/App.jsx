@@ -1,4 +1,5 @@
 import React, { useState, Component } from 'react';
+import { TimesCollectionAccess } from './../../lib/times.js';
 import moment from 'moment';
 
 export const App = () => (
@@ -7,36 +8,53 @@ export const App = () => (
   </div>
 );
 
-var timerStarted = false; //Eventually pull from DB
+var timeObject;
+var timerStarted; //Eventually pull from DB
 var startTime;
 var endTime;
 var currentTime;
-var elapsedTime = "00:00:00"; //Eventually pull from DB
+var elapsedTime; //Eventually pull from DB
 
-buttonText = "Start"; //Eventually pull from DB
+//buttonText; //Eventually pull from DB
+// var brokenTimeList = TimesCollectionAccess.find({is_active: true});
+timeObject = TimesCollectionAccess.findOne({is_active: true});
+if (timeObject != undefined){
+    TimesCollectionAccess.update({_id:timeObject._id},{
+        $set:{
+        stop_time:null,
+        is_active:false,
+    }});
+}
+
+timerStarted = false;
+elapsedTime = 0;
+buttonText = "Start";
 
 
 function getTime() {
-  if (timerStarted == false) {
-    startTime = currentTime;
-    endTime = "Waiting..."
-    buttonText = "Stop";
-    timerStarted = true;
-  } else {
-    endTime = currentTime;
-    buttonText = "Start";
-    timerStarted = false;
-  }
+    //timer not started
+    if (timerStarted == false) {
+        startTime = currentTime;
+        endTime = "Waiting..."
+        buttonText = "Stop";
+        timerStarted = true;
+    //timer started
+    } else {
+        endTime = currentTime;
+        buttonText = "Start";
+        timerStarted = false;
+    }
 }
 
 function FormattedDate(props) {
+    //runs each tick
   currentTime = Math.floor(props.date.getTime()/1000);
   if(timerStarted == true) {
     elapsedTime = currentTime - startTime;
   } else if(endTime) {
     elapsedTime = endTime - startTime;
   } else {
-    elapsedTime = "00:00:00"; //Eventually Pull from DB
+    elapsedTime = 0; //Eventually Pull from DB
   }
   return (
     <div id="homeTimer">
@@ -84,5 +102,3 @@ class Clock extends React.Component {
     );
   }
 }
-
-
