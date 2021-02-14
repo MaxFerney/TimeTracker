@@ -1,6 +1,8 @@
 import React, { useState, Component } from 'react';
-import { TimesCollectionAccess } from './../../lib/times.js';
+import {Helmet} from "react-helmet";
+
 import moment from 'moment';
+import { TimesCollectionAccess } from './../../lib/times.js';
 
 export const App = () => (
   <div>
@@ -8,7 +10,7 @@ export const App = () => (
   </div>
 );
 
-ESTCurrentTimeFix = 18000000;
+const ESTCurrentTimeFix = 18000000;
 
 var timerStarted = false; //Eventually pull from DB
 var startTime;
@@ -17,6 +19,7 @@ var currentTime;
 var elapsedTime = 0; //Eventually pull from DB
 var oldTimeObject;
 var timeObject;
+var startStopBtnClass = 'greenBG';
 //app closed unexpectedly - close old time(s)
 // TimesCollectionAccess.findAndModify(
 //   {is_active:true},
@@ -70,6 +73,16 @@ var timeObject;
 //   }});
 // }
 
+const cursor = TimesCollectionAccess.find({});
+cursor.forEach((cursorItem, index) => {
+  console.log(
+    "[\nid: "+cursorItem._id+
+    "start_time: "+cursorItem.start_time+
+    "stop_time: "+cursorItem.stop_time+
+    "is_active: "+cursorItem.is_active+"\n]"
+  )
+});
+
 timerStarted = false;
 elapsedTime = 0;
 buttonText = "Start";
@@ -90,7 +103,7 @@ function checkAndFixDeadTimes(){
 }
 
 function findAndUpdate(){
-  var timeObject = TimesCollectionAccess.findOne({is_active: true});
+  timeObject = TimesCollectionAccess.findOne({is_active: true});
   TimesCollectionAccess.update({_id:timeObject._id},{
      $set:{
      stop_time:currentTime,
@@ -99,7 +112,21 @@ function findAndUpdate(){
 }
 
 
-checkAndFixDeadTimes();
+// checkAndFixDeadTimes();
+
+timeObject = TimesCollectionAccess.findOne({is_active:true});
+console.log(timeObject);
+while (timeObject != undefined){
+  TimesCollectionAccess.update({_id:timeObject._id},{
+    $set:{
+    stop_time:null,
+    is_active:false,
+  }});
+  console.log("deleted an old time: "+timeObject._id);
+  timeObject = TimesCollectionAccess.findOne({is_active:true});
+}
+console.log("fixed all dead times!");
+
 
 function pushTimerBtn() {
   $('#manuallyInsertBtn').fadeToggle();
@@ -112,16 +139,24 @@ function pushTimerBtn() {
     TimesCollectionAccess.insert({
       start_time: currentTime,
       stop_time: 0,
-      is_active: true
+      is_active: true,
     });
-    $('#startStopBtn').removeClass('greenBG').addClass('redBG');
-
+    //$('#startStopBtn').removeClass('greenBG').addClass('redBG');
+    startStopBtnClass='redBG';
+    timeObject = TimesCollectionAccess.findOne({is_active: true});
   } else {
     endTime = currentTime;
     buttonText = "Start";
     timerStarted = false;
 
-    findAndUpdate();
+    // findAndUpdate();
+    timeObject = TimesCollectionAccess.findOne({is_active:true})
+    console.log("ENTIRE DB\n\n"+TimesCollectionAccess.find().fetch());
+    TimesCollectionAccess.update({_id:timeObject._id},{
+      $set:{
+      stop_time:currentTime,
+      is_active:false,
+    }});
     // TimesCollectionAccess.find
     // TimesCollectionAccess.findOneAndUpdate(
     //   {is_active: true},
@@ -142,17 +177,16 @@ function pushTimerBtn() {
     //all items in db
     const cursor = TimesCollectionAccess.find({});
     cursor.forEach((cursorItem, index) => {
-      console.log(
-        "[\nid: "+cursorItem._id+
-        "start_time: "+cursorItem.start_time+
-        "stop_time: "+cursorItem.stop_time+
-        "is_active: "+cursorItem.is_active+"\n]"
-      )
+      console.log("[\nid: "+cursorItem._id);
+      console.log("start_time: "+cursorItem.start_time);
+      console.log("stop_time: "+cursorItem.stop_time);
+      console.log("is_active: "+cursorItem.is_active+"\n]");
     });
 
 
 
-    $('#startStopBtn').removeClass('redBG').addClass('greenBG');
+    //$('#startStopBtn').removeClass('redBG').addClass('greenBG');
+    startStopBtnClass='greenBG';
   }
 }
 
@@ -168,17 +202,35 @@ function FormattedDate(props) {
   }
 
   return (
-    <div id="homeTimer">
-      <h2>Welcome Back <br/> <span id="userName">User X</span></h2>
-      <h2>{moment().format('LTS')}</h2>
-      <h1>{moment(ESTCurrentTimeFix + elapsedTime*1000).format('HH:mm:ss')}</h1>
-      <button id="startStopBtn" class="dropShadow greenBG" onClick={pushTimerBtn}>
-          {buttonText}
-      </button>
-      <button id="manuallyInsertBtn" class="dropShadow tanBG" onclick="">
-        Manually Insert Time
-      </button>
+    <div id="bodyDiv">
+      {/*<Helmet>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="js/main.js"></script>
+      </Helmet>*/}
+      <header className="redBG">
+        <h2>Winthrop University</h2>
+      </header>
+      <div id="homeTimer">
+
+        <h2>Welcome Back <br/> <span id="userName">User X</span></h2>
+        <h2>{moment().format('LTS')}</h2>
+        <h1>{moment(ESTCurrentTimeFix + elapsedTime*1000).format('HH:mm:ss')}</h1>
+        <button id="startStopBtn" className={"dropShadow "+startStopBtnClass} onClick={pushTimerBtn}>
+            {buttonText}
+        </button>
+        <button id="manuallyInsertBtn" className="dropShadow tanBG" onclick="">
+          Manually Insert Time
+        </button>
+      </div>
+      <footer className="redBG">
+        <ul>
+          <li><a href="#"><img src="images/Home.png" alt="Settings Icon"/></a></li>
+          <li><a href="#"><img src="images/List.png" alt="Settings Icon"/></a></li>
+          <li><a href="#"><img src="images/Settings.png" alt="Settings Icon"/></a></li>
+        </ul>
+      </footer>
     </div>
+
   );
 }
 
