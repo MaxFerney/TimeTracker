@@ -20,58 +20,6 @@ var elapsedTime = 0; //Eventually pull from DB
 var oldTimeObject;
 var timeObject;
 var startStopBtnClass = 'greenBG';
-//app closed unexpectedly - close old time(s)
-// TimesCollectionAccess.findAndModify(
-//   {is_active:true},
-//   [],
-//   {
-//     $set:{
-//       is_active:false,
-//       stop_time:null
-//     }
-//   },
-//   function(err, object) {
-//     if (err){
-//       console.warn(err.message);  // returns error if no matching object found
-//     } else {
-//       console.dir("ITEM FOUND!\n\t"+object);
-//     }
-//   }
-// );
-// TimesCollectionAccess.findOneAndUpdate(
-//   {is_active: true},
-//   {
-//     $set: {
-//       is_active: false,
-//       stop_time: null
-//     }
-//   }, function (err, result){
-//     if (err){
-//       console.warn("no broken times\n"+err.message);
-//     } else {
-//       console.log("culled item: ["+result.value._id+"]");
-//     }
-//   }
-// );
-
-
-// oldTimeObject = TimesCollectionAccess.findOne(
-//   {is_active:true}.callback
-//   function(err, result){
-//     if (err){
-//       console.warn("no broken times\n"+err.message);
-//     } else {
-//       console.log("culled item: ["+result.value._id+"]");
-//     }
-//   }
-// )
-// if (oldTimeObject != undefined){
-//   TimesCollectionAccess.update({_id:timeObject._id},{
-//     $set:{
-//     stop_time:null,
-//     is_active:false,
-//   }});
-// }
 
 const cursor = TimesCollectionAccess.find({});
 cursor.forEach((cursorItem, index) => {
@@ -96,8 +44,18 @@ function checkAndFixDeadTimes(){
       stop_time:null,
       is_active:false,
     }});
-    console.log("deleted an old time: "+oldTimeObject._id);
+    console.log("null'd an old time: "+oldTimeObject._id);
     oldTimeObject = TimesCollectionAccess.findOne({is_active:true});
+  }
+  console.log("fixed all dead times!");
+}
+
+function removeDeadTimes(){
+  var oldTimeObject = TimesCollectionAccess.findOne({is_active:true});
+  while (oldTimeObject != undefined){
+    TimesCollectionAccess.remove({_id:oldTimeObject._id});
+    console.log("deleted an old time: "+oldTimeObject._id);
+    var oldTimeObject = TimesCollectionAccess.findOne({is_active:true});
   }
   console.log("fixed all dead times!");
 }
@@ -114,18 +72,6 @@ function findAndUpdate(){
 
 checkAndFixDeadTimes();
 
-// timeObject = TimesCollectionAccess.findOne({is_active:true});
-// console.log(timeObject);
-// while (timeObject != undefined){
-//   TimesCollectionAccess.update({_id:timeObject._id},{
-//     $set:{
-//     stop_time:null,
-//     is_active:false,
-//   }});
-//   console.log("deleted an old time: "+timeObject._id);
-//   timeObject = TimesCollectionAccess.findOne({is_active:true});
-// }
-// console.log("fixed all dead times!");
 
 
 function pushTimerBtn() {
@@ -134,19 +80,21 @@ function pushTimerBtn() {
   if (timerStarted == false) {
     $('#startStopBtn').removeClass('greenBG').addClass('redBG');
 
-    timeObject = TimesCollectionAccess.findOne({is_active:true});
-    console.log(timeObject);
-    while (timeObject != undefined){
-      TimesCollectionAccess.update({_id:timeObject._id},{
-        $set:{
-        stop_time:null,
-        is_active:false,
-      }});
-      console.log("deleted an old time: "+timeObject._id);
-      timeObject = TimesCollectionAccess.findOne({is_active:true});
-    }
-    console.log("fixed all dead times!");
-    
+    //checkAndFixDeadTimes();
+    removeDeadTimes();
+    // timeObject = TimesCollectionAccess.findOne({is_active:true});
+    // console.log(timeObject);
+    // while (timeObject != undefined){
+    //   TimesCollectionAccess.update({_id:timeObject._id},{
+    //     $set:{
+    //     stop_time:null,
+    //     is_active:false,
+    //   }});
+    //   console.log("deleted an old time: "+timeObject._id);
+    //   timeObject = TimesCollectionAccess.findOne({is_active:true});
+    // }
+
+
     startTime = currentTime;
     endTime = "Waiting..."
     buttonText = "Stop";
@@ -173,22 +121,6 @@ function pushTimerBtn() {
       stop_time:currentTime,
       is_active:false,
     }});
-    // TimesCollectionAccess.find
-    // TimesCollectionAccess.findOneAndUpdate(
-    //   {is_active: true},
-    //   {
-    //     $set: {
-    //       is_active: false,
-    //       stop_time: currentTime
-    //     }
-    //   }, function (err, result){
-    //     if (err){
-    //       console.warn("TIME ITEM NOT FOUND!!\n"+err.message);
-    //     } else {
-    //       console.log("Stopped Time ID: ["+result.value._id+"]");
-    //     }
-    //   }
-    // );
 
     //all items in db
     const cursor = TimesCollectionAccess.find({});
@@ -219,10 +151,6 @@ function FormattedDate(props) {
 
   return (
     <div id="bodyDiv">
-      {/*<Helmet>
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="js/main.js"></script>
-      </Helmet>*/}
       <header className="redBG">
         <h2>Winthrop University</h2>
       </header>
