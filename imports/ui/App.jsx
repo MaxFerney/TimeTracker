@@ -112,20 +112,20 @@ function findAndUpdate(){
 }
 
 
-// checkAndFixDeadTimes();
+checkAndFixDeadTimes();
 
-timeObject = TimesCollectionAccess.findOne({is_active:true});
-console.log(timeObject);
-while (timeObject != undefined){
-  TimesCollectionAccess.update({_id:timeObject._id},{
-    $set:{
-    stop_time:null,
-    is_active:false,
-  }});
-  console.log("deleted an old time: "+timeObject._id);
-  timeObject = TimesCollectionAccess.findOne({is_active:true});
-}
-console.log("fixed all dead times!");
+// timeObject = TimesCollectionAccess.findOne({is_active:true});
+// console.log(timeObject);
+// while (timeObject != undefined){
+//   TimesCollectionAccess.update({_id:timeObject._id},{
+//     $set:{
+//     stop_time:null,
+//     is_active:false,
+//   }});
+//   console.log("deleted an old time: "+timeObject._id);
+//   timeObject = TimesCollectionAccess.findOne({is_active:true});
+// }
+// console.log("fixed all dead times!");
 
 
 function pushTimerBtn() {
@@ -133,6 +133,20 @@ function pushTimerBtn() {
 
   if (timerStarted == false) {
     $('#startStopBtn').removeClass('greenBG').addClass('redBG');
+
+    timeObject = TimesCollectionAccess.findOne({is_active:true});
+    console.log(timeObject);
+    while (timeObject != undefined){
+      TimesCollectionAccess.update({_id:timeObject._id},{
+        $set:{
+        stop_time:null,
+        is_active:false,
+      }});
+      console.log("deleted an old time: "+timeObject._id);
+      timeObject = TimesCollectionAccess.findOne({is_active:true});
+    }
+    console.log("fixed all dead times!");
+    
     startTime = currentTime;
     endTime = "Waiting..."
     buttonText = "Stop";
