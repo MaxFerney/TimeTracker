@@ -169,10 +169,10 @@ function FormattedDate(props) {
       <h2>Welcome Back <br/> <span id="userName">User X</span></h2>
       <h2>{moment().format('LTS')}</h2>
       <h1>{moment(ESTCurrentTimeFix + elapsedTime*1000).format('HH:mm:ss')}</h1>
-      <button id="startStopBtn" class="dropShadow greenBG" onClick={pushTimerBtn()}>
+      <button id="startStopBtn" className="dropShadow greenBG" onClick={pushTimerBtn()}>
           {buttonText}
       </button>
-      <button id="manuallyInsertBtn" class="dropShadow tanBG" onClick="">
+      <button id="manuallyInsertBtn" className="dropShadow tanBG">
         Manually Insert Time
       </button>
     </div>
