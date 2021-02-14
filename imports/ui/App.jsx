@@ -82,18 +82,6 @@ function pushTimerBtn() {
 
     //checkAndFixDeadTimes();
     removeDeadTimes();
-    // timeObject = TimesCollectionAccess.findOne({is_active:true});
-    // console.log(timeObject);
-    // while (timeObject != undefined){
-    //   TimesCollectionAccess.update({_id:timeObject._id},{
-    //     $set:{
-    //     stop_time:null,
-    //     is_active:false,
-    //   }});
-    //   console.log("deleted an old time: "+timeObject._id);
-    //   timeObject = TimesCollectionAccess.findOne({is_active:true});
-    // }
-
 
     startTime = currentTime;
     endTime = "Waiting..."
