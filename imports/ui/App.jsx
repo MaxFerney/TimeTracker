@@ -132,6 +132,7 @@ function pushTimerBtn() {
   $('#manuallyInsertBtn').fadeToggle();
 
   if (timerStarted == false) {
+    $('#startStopBtn').removeClass('greenBG').addClass('redBG');
     startTime = currentTime;
     endTime = "Waiting..."
     buttonText = "Stop";
@@ -145,6 +146,7 @@ function pushTimerBtn() {
     startStopBtnClass='redBG';
     timeObject = TimesCollectionAccess.findOne({is_active: true});
   } else {
+    $('#startStopBtn').removeClass('redBG').addClass('greenBG');
     endTime = currentTime;
     buttonText = "Start";
     timerStarted = false;
