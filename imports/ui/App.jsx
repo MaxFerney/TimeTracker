@@ -172,7 +172,6 @@ function FormattedDate(props) {
       <h2>Welcome Back <br/> <span id="userName">User X</span></h2>
       <h2>{moment().format('LTS')}</h2>
       <h1>{moment(ESTCurrentTimeFix + elapsedTime*1000).format('HH:mm:ss')}</h1>
-      {console.log(elapsedTime)}
       <button id="startStopBtn" class="dropShadow greenBG" onClick={pushTimerBtn}>
           {buttonText}
       </button>
@@ -192,7 +191,7 @@ class Clock extends React.Component {
   componentDidMount() {
     this.timerID = setInterval(
       () => this.tick(),
-      1000
+      100
     );
   }
 
