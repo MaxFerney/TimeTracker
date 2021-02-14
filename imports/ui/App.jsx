@@ -15,22 +15,91 @@ var startTime;
 var endTime;
 var currentTime;
 var elapsedTime = 0; //Eventually pull from DB
+var oldTimeObject;
+var timeObject;
+//app closed unexpectedly - close old time(s)
+// TimesCollectionAccess.findAndModify(
+//   {is_active:true},
+//   [],
+//   {
+//     $set:{
+//       is_active:false,
+//       stop_time:null
+//     }
+//   },
+//   function(err, object) {
+//     if (err){
+//       console.warn(err.message);  // returns error if no matching object found
+//     } else {
+//       console.dir("ITEM FOUND!\n\t"+object);
+//     }
+//   }
+// );
+// TimesCollectionAccess.findOneAndUpdate(
+//   {is_active: true},
+//   {
+//     $set: {
+//       is_active: false,
+//       stop_time: null
+//     }
+//   }, function (err, result){
+//     if (err){
+//       console.warn("no broken times\n"+err.message);
+//     } else {
+//       console.log("culled item: ["+result.value._id+"]");
+//     }
+//   }
+// );
 
-//buttonText; //Eventually pull from DB
-// var brokenTimeList = TimesCollectionAccess.find({is_active: true});
-timeObject = TimesCollectionAccess.findOne({is_active: true});
-if (timeObject != undefined){
-    TimesCollectionAccess.update({_id:timeObject._id},{
-        $set:{
-        stop_time:null,
-        is_active:false,
-    }});
-}
+
+// oldTimeObject = TimesCollectionAccess.findOne(
+//   {is_active:true}.callback
+//   function(err, result){
+//     if (err){
+//       console.warn("no broken times\n"+err.message);
+//     } else {
+//       console.log("culled item: ["+result.value._id+"]");
+//     }
+//   }
+// )
+// if (oldTimeObject != undefined){
+//   TimesCollectionAccess.update({_id:timeObject._id},{
+//     $set:{
+//     stop_time:null,
+//     is_active:false,
+//   }});
+// }
 
 timerStarted = false;
 elapsedTime = 0;
 buttonText = "Start";
 
+
+function checkAndFixDeadTimes(){
+  var oldTimeObject = TimesCollectionAccess.findOne({is_active:true});
+  while (oldTimeObject != undefined){
+    TimesCollectionAccess.update({_id:oldTimeObject._id},{
+      $set:{
+      stop_time:null,
+      is_active:false,
+    }});
+    console.log("deleted an old time: "+oldTimeObject._id);
+    oldTimeObject = TimesCollectionAccess.findOne({is_active:true});
+  }
+  console.log("fixed all dead times!");
+}
+
+function findAndUpdate(){
+  var timeObject = TimesCollectionAccess.findOne({is_active: true});
+  TimesCollectionAccess.update({_id:timeObject._id},{
+     $set:{
+     stop_time:currentTime,
+     is_active:false,
+   }});
+}
+
+
+checkAndFixDeadTimes();
 
 function pushTimerBtn() {
   $('#manuallyInsertBtn').fadeToggle();
@@ -40,13 +109,48 @@ function pushTimerBtn() {
     endTime = "Waiting..."
     buttonText = "Stop";
     timerStarted = true;
-
+    TimesCollectionAccess.insert({
+      start_time: currentTime,
+      stop_time: 0,
+      is_active: true
+    });
     $('#startStopBtn').removeClass('greenBG').addClass('redBG');
 
   } else {
     endTime = currentTime;
     buttonText = "Start";
     timerStarted = false;
+
+    findAndUpdate();
+    // TimesCollectionAccess.find
+    // TimesCollectionAccess.findOneAndUpdate(
+    //   {is_active: true},
+    //   {
+    //     $set: {
+    //       is_active: false,
+    //       stop_time: currentTime
+    //     }
+    //   }, function (err, result){
+    //     if (err){
+    //       console.warn("TIME ITEM NOT FOUND!!\n"+err.message);
+    //     } else {
+    //       console.log("Stopped Time ID: ["+result.value._id+"]");
+    //     }
+    //   }
+    // );
+
+    //all items in db
+    const cursor = TimesCollectionAccess.find({});
+    cursor.forEach((cursorItem, index) => {
+      console.log(
+        "[\nid: "+cursorItem._id+
+        "start_time: "+cursorItem.start_time+
+        "stop_time: "+cursorItem.stop_time+
+        "is_active: "+cursorItem.is_active+"\n]"
+      )
+    });
+
+
 
     $('#startStopBtn').removeClass('redBG').addClass('greenBG');
   }
