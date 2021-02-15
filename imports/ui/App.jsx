@@ -1,29 +1,47 @@
 //modules
 import React, { useState, Component } from 'react';
+import {BrowserRouter as Router, Route, Navlink, Switch} from 'react-router-dom';
 import {Helmet} from "react-helmet";
 import PropTypes from 'prop-types';
 import moment from 'moment';
 //dbs
 import { TimesCollectionAccess } from './../../lib/times.js';
 //pages
-import Clock from './pages/clock.jsx'
+import Clock from './pages/Clock.jsx';
+import TimeList from './pages/TimeList.jsx';
+import EditTime from './pages/EditTime.jsx';
+import Settings from './pages/Settings.jsx';
 
 export default class App extends React.Component{
   render(){
     return(
-      <div>
-        <header className="redBG">
-          <h2>Winthrop University</h2>
-        </header>
-        <Clock/>
-        <footer className="redBG">
-          <ul>
-            <li><a href="#"><img src="images/Home.png" alt="Settings Icon"/></a></li>
-            <li><a href="#"><img src="images/List.png" alt="Settings Icon"/></a></li>
-            <li><a href="#"><img src="images/Settings.png" alt="Settings Icon"/></a></li>
-          </ul>
-        </footer>
-      </div>
+      <>
+        <Router>
+          <Switch>
+            <Route
+              key="Clock"
+              path="/"
+              exact >
+              <Clock />
+            </Route>
+            <Route
+              key="TimeList"
+              path="/TimeList"
+              exact >
+              <TimeList />
+            </Route>
+            {/*this will be edit time*/}
+            <Route
+              key="Settings"
+              path="/Settings"
+              exact >
+              <Settings />
+            </Route>
+
+          </Switch>
+        </Router>
+      </>
+
     );
   }
 }
