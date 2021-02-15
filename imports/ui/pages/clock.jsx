@@ -2,10 +2,11 @@ import React from 'react';
 import {BrowserRouter as Router,Switch,Route,NavLink} from "react-router-dom";
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { TimesCollectionAccess } from './../../../lib/times.js';
+import { TimesCollectionAccess } from '../../../lib/times.js';
 import Footer from '../components/footer.jsx';
 import Header from '../components/header.jsx';
 
+//a change
 
 const ESTCurrentTimeFix = 18000000;
 
