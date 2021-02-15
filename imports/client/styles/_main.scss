@@ -83,6 +83,24 @@ button {
   padding: 10px 0px;
 }
 
+.times {
+  li{
+    background-color: lightgrey;
+    border-bottom: solid 2px black;
+    p {
+      text-align: right;
+      padding: 20px 10px;
+    }
+    p:nth-of-type(1) {
+      text-align: left;
+      float: left;
+    }
+  }
+  li:nth-of-type(1) {
+    border-top: solid 2px black;
+  }
+}
+
 footer {
   bottom: 0;
   ul {
