@@ -4,19 +4,20 @@ import moment from 'moment';
 import Footer from './../components/footer.jsx';
 import Header from './../components/header.jsx';
 import { TimesCollectionAccess } from './../../../lib/times.js';
+import { NavLink } from 'react-router-dom';
 export default class TimeList extends React.Component{
   datesAvaliable(){
     var dates = [];
     TimesCollectionAccess.find({},{sort: {start_time:-1}}).fetch().map((timeItem) => {
       var date=moment(timeItem.start_time*1000).format("MMMM Do YYYY");
-      console.log("DATE: "+date);
-      console.log("DATE IN DATES: "+dates.indexOf(date) > -1);
+      //console.log("DATE: "+date);
+      //console.log("DATE IN DATES: "+dates.indexOf(date) > -1);
       if(!(dates.indexOf(date) > -1)){
         dates.push(date);
       }
     });
     dates.forEach((item, i) => {
-      console.log(item);
+      //console.log(item);
     });
 
     return(
@@ -26,8 +27,10 @@ export default class TimeList extends React.Component{
   renderTimeItem(timeItem){
     return(
       <div key={timeItem._id} className="timeDetails">
-        <p>{start = moment(timeItem.start_time*1000).format('LT')} - {moment(timeItem.stop_time*1000).format('LT')}</p>
-        <p>Placeholder Category</p>
+        <NavLink to={"/edit/" + timeItem._id}>
+          <p>{start = moment(timeItem.start_time*1000).format('LT')} - {moment(timeItem.stop_time*1000).format('LT')}</p>
+          <p>Placeholder Category</p>
+        </NavLink>
       </div>
     );
   }

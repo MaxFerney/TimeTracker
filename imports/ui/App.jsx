@@ -1,6 +1,6 @@
 //modules
 import React, { useState, Component } from 'react';
-import {BrowserRouter as Router, Route, Navlink, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Navlink, Switch, useParams} from 'react-router-dom';
 import {Helmet} from "react-helmet";
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -11,6 +11,14 @@ import Clock from './pages/clock.jsx';
 import TimeList from './pages/TimeList.jsx';
 import EditTime from './pages/EditTime.jsx';
 import Settings from './pages/Settings.jsx';
+
+function User() {
+  let { id } = useParams();
+  console.log("The id is: " + id);
+  return(
+    <EditTime passedID={id}/>
+  )
+}
 
 export default class App extends React.Component{
   render(){
@@ -36,6 +44,13 @@ export default class App extends React.Component{
               path="/Settings"
               exact >
               <Settings />
+            </Route>
+            <Route
+              key="EditTime"
+              path="/edit/:id"
+              exact 
+              >
+              <User />
             </Route>
 
           </Switch>

@@ -91,7 +91,7 @@ const helper_functions = {
           <button id="startStopBtn" className="dropShadow greenBG" onClick={pushTimerBtn}>
               {buttonText}
           </button>
-          <button id="manuallyInsertBtn" className="dropShadow tanBG" onclick="">
+          <button id="manuallyInsertBtn" className="dropShadow tanBG" onClick="">
             Manually Insert Time
           </button>
         </div>
