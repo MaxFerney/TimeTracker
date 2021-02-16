@@ -14,7 +14,7 @@ body {
 
   z-index: 1;
 
-  background: linear-gradient(#FFFFFF, #E1E1E1)
+  background: linear-gradient(#FFFFFF, #D1D1D1)
 }
 
 #react-target {
@@ -96,7 +96,7 @@ button {
 
 .time_item {
   .timeDetails{
-    background-color: lightgrey;
+    background-color: $white;
     border-bottom: solid 2px black;
     p {
       text-align: right;
