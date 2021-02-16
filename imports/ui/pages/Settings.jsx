@@ -1,5 +1,6 @@
 import React from 'react';
 import {Helmet} from "react-helmet";
+import PropTypes from 'prop-types';
 import Footer from './../components/footer.jsx';
 import Header from './../components/header.jsx';
 export default class Settings extends React.Component{

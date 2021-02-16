@@ -13,9 +13,19 @@ import EditTime from './pages/EditTime.jsx';
 import Settings from './pages/Settings.jsx';
 
 export default class App extends React.Component{
+  routeEditTimes(){
+    const listTimes = TimesCollectionAccess.find({},{sort: {start_time:-1}}).fetch().map((timeItem) =>
+      <Route
+          key={timeItem._id}
+          path={"/edit/"+timeItem._id}>
+          <EditTime timeItem={timeItem}/>
+      </Route>
+    );
+    return listTimes;
+
+  }
   render(){
     return(
-      <>
         <Router>
           <Switch>
             <Route
@@ -30,7 +40,12 @@ export default class App extends React.Component{
               exact >
               <TimeList />
             </Route>
-            {/*this will be edit time*/}
+            <Route
+              key="Edit"
+              path="/edit/:id">
+              <EditTime />
+            </Route>
+            { /*this.routeEditTimes()*/ }
             <Route
               key="Settings"
               path="/Settings"
@@ -40,7 +55,6 @@ export default class App extends React.Component{
 
           </Switch>
         </Router>
-      </>
     );
   }
 }
