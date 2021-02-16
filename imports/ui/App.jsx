@@ -7,7 +7,7 @@ import moment from 'moment';
 //dbs
 import { TimesCollectionAccess } from './../../lib/times.js';
 //pages
-import Clock from './pages/Clock.jsx';
+import Clock from './pages/clock.jsx';
 import TimeList from './pages/TimeList.jsx';
 import EditTime from './pages/EditTime.jsx';
 import Settings from './pages/Settings.jsx';
