@@ -25,8 +25,8 @@ export default class TimeList extends React.Component{
   }
   renderTimeItem(timeItem){
     return(
-      <div key={timeItem._id} class="timeDetails">
-        <p> {start = moment(timeItem.start_time*1000).format('LT')} - {moment(timeItem.stop_time*1000).format('LT')}</p>
+      <div key={timeItem._id} className="timeDetails">
+        <p>{start = moment(timeItem.start_time*1000).format('LT')} - {moment(timeItem.stop_time*1000).format('LT')}</p>
         <p>Placeholder Category</p>
       </div>
     );
@@ -45,7 +45,7 @@ export default class TimeList extends React.Component{
   renderTimeList(){
     var dates = this.datesAvaliable();
     const dateList = dates.map((date, index) =>
-      <div key={index.toString()} class="time_item">
+      <div key={index.toString()} className="time_item">
         <p>{date}</p>
         {this.renderTimesInDate(date)}
       </div>
