@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {Helmet} from "react-helmet";
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -8,12 +8,13 @@ import Footer from './../components/footer.jsx';
 import Header from './../components/header.jsx';
 
 import { TimesCollectionAccess } from './../../../lib/times.js';
-logItem = function(){
-  let { id } = useParams();
-
-  console.log(id);
-}
+// logItem = function(){
+//   let { id } = useParams();
+//
+//   console.log(id);
+// }
 export default class EditTime extends React.Component{
+
   render(){
     return (
      <div>
@@ -24,7 +25,7 @@ export default class EditTime extends React.Component{
        <h1>EDIT YOUR TIMES</h1>
        <p>This means we couldn't find the page you were looking for</p>
        <div class="timeInfo">
-       {logItem}
+       {console.log(this.props.passedTimeItem._id)}
 
 
        </div>
@@ -33,6 +34,17 @@ export default class EditTime extends React.Component{
     );
   }
 }
+// const time_id = () => {
+//   const [state, setState] = useState({});
+//   const { id } = useParams();
+//   useEffect( () => {
+//       api.getTeam(id).then(data => {
+//          //logic
+//       }
+// };
+// export default EditTime;
+
+
 // EditTime.propTypes = {
 //     timeItem: PropTypes.object.isRequired,
 // };

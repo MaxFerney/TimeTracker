@@ -17,8 +17,8 @@ export default class App extends React.Component{
     const listTimes = TimesCollectionAccess.find({},{sort: {start_time:-1}}).fetch().map((timeItem) =>
       <Route
           key={timeItem._id}
-          path={"/edit/"+timeItem._id}>
-          <EditTime timeItem={timeItem}/>
+          path={"/edit/"+timeItem.start_time}>
+          <EditTime passedTimeItem={timeItem}/>
       </Route>
     );
     return listTimes;
@@ -40,12 +40,9 @@ export default class App extends React.Component{
               exact >
               <TimeList />
             </Route>
-            <Route
-              key="Edit"
-              path="/edit/:id">
-              <EditTime />
-            </Route>
-            { /*this.routeEditTimes()*/ }
+
+            { this.routeEditTimes() }
+
             <Route
               key="Settings"
               path="/Settings"
@@ -58,3 +55,9 @@ export default class App extends React.Component{
     );
   }
 }
+// <Route
+//   key="Edit"
+//   path="/edit/:id"
+//   exact >
+//   <EditTime />
+// </Route>
