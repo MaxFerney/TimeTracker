@@ -54,7 +54,7 @@ export default class Clock extends React.Component {
       var oldTimeObject = TimesCollectionAccess.findOne({is_active:true});
       alert('You previously closed the app with the timer running, please leave the app open in the background to track your time.');
     }
-    console.log("fixed all dead times!");
+    //console.log("fixed all dead times!");
     return;
   }
 
@@ -86,7 +86,7 @@ export default class Clock extends React.Component {
 
       // findAndUpdate();
       timeObject = TimesCollectionAccess.findOne({is_active:true})
-       console.log("added item to DB");
+       //console.log("added item to DB");
       TimesCollectionAccess.update({_id:timeObject._id},{
         $set:{
         stop_time:currentTime,

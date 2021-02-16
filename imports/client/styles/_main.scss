@@ -83,9 +83,10 @@ button {
   padding: 10px 0px;
 }
 
-.times {
-  li{
+.time_item {
+  .timeDetails{
     background-color: lightgrey;
+    border-top: solid 2px black;
     border-bottom: solid 2px black;
     p {
       text-align: right;
@@ -96,9 +97,12 @@ button {
       float: left;
     }
   }
-  li:nth-of-type(1) {
-    border-top: solid 2px black;
-  }
+}
+
+.time_item > p {
+  text-align: left;
+  padding-left: 10px;
+  margin-top: 20px;
 }
 
 footer {

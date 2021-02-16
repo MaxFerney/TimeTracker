@@ -13,14 +13,18 @@ export default class TimeList extends React.Component{
                </Helmet>
                <Header />
                <div className="times">
-                 <ul>
-                  { TimesCollectionAccess.find().fetch().map((timeItem) =>
-                    <li key={timeItem._id} className="time_item">
-                      <p> {start = moment(timeItem.start_time*1000).format('LT')} - {moment(timeItem.stop_time*1000).format('LT')}</p>
-                      <p>Placeholder Category</p>
-                    </li>
-                  )}
-                  </ul>
+                    { TimesCollectionAccess.find({},{sort: {start_time:-1}}).fetch().map((timeItem) =>
+                      <div key={timeItem._id} className="time_item">
+                        {console.log(moment(timeItem.start_time*1000).format("MMMM Do YYYY"))}
+
+                        <p>{moment(timeItem.start_time*1000).format("MMMM Do YYYY")}</p>
+
+                        <div class="timeDetails">
+                          <p> {start = moment(timeItem.start_time*1000).format('LT')} - {moment(timeItem.stop_time*1000).format('LT')}</p>
+                          <p>Placeholder Category</p>
+                        </div>
+                      </div>
+                    )}
                 </div>
                <Footer />
            </div>
