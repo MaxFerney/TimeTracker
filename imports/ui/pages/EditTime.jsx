@@ -10,8 +10,43 @@ import Footer from './../components/footer.jsx';
 import Header from './../components/header.jsx';
 
 import { TimesCollectionAccess } from './../../../lib/times.js';
+<<<<<<< HEAD
 
 export default class EditTime extends React.Component{
+=======
+/*
+$(document).on('ready', function() {
+    $("#saveValuesBtn").click(function() {
+        console.log('Updated');
+    })
+});
+*/
+export default class EditTime extends React.Component{
+    updateDB(currentEvent, startTime=null, stopTime=null, category=null){
+        //MAKE SURE TIMES ARE IN UNIX TIME (SECONDS)
+        if (startTime!=null){
+            TimesCollectionAccess.update({_id:currentEvent._id},{$set:{
+                    start_time: startTime
+                }
+            });
+        } if (stopTime!=null) {
+            TimesCollectionAccess.update({_id:currentEvent._id},{$set:{
+                    stop_time: stopTime
+                }
+            });
+        } if (category!=null){
+            TimesCollectionAccess.update({_id:currentEvent._id},{$set:{
+                    category: category
+                }
+            });
+        } else {
+            console.error("Update db was called, but nothing was updated!");
+        }
+    }
+    seeNewTime() {
+        console.log($('#newTime').value);
+    }
+>>>>>>> 7fd9aacdbf63604c4b3f2f2cd221e4ff36ffa614
 
     getData() {
         //console.log(this.props.passedID);
@@ -40,7 +75,7 @@ export default class EditTime extends React.Component{
                     Save
                 </button>
             </div>
-        );        
+        );
     }
 
     render(){
