@@ -74,6 +74,7 @@ export default class Clock extends React.Component {
       TimesCollectionAccess.insert({
         start_time: currentTime,
         stop_time: 0,
+        category: "placeholder",
         is_active: true,
       });
       $('#startStopBtn').removeClass('greenBG').addClass('redBG');
