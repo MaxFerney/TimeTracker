@@ -10,18 +10,8 @@ import Footer from './../components/footer.jsx';
 import Header from './../components/header.jsx';
 
 import { TimesCollectionAccess } from './../../../lib/times.js';
-/*
-$(document).on('ready', function() {
-    $("#saveValuesBtn").click(function() {
-        console.log('Updated');
-    })
-});
-*/
-export default class EditTime extends React.Component{
 
-    seeNewTime() {
-        console.log($('#newTime').value);
-    }
+export default class EditTime extends React.Component{
 
     getData() {
         //console.log(this.props.passedID);
