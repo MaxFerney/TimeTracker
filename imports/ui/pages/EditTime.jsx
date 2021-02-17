@@ -35,7 +35,7 @@ export default class EditTime extends React.Component{
         }
     }
 */
-    seeNewTime() {
+    seeNewTime(passedID) {
         console.log('New start time: ' + moment($('#newTimeStart').val(), "HH:mm").format('X'));
         console.log('New end time: ' + moment($('#newTimeEnd').val(), "HH:mm").format('X'));
 
@@ -43,23 +43,23 @@ export default class EditTime extends React.Component{
         var stopTime = moment($('#newTimeEnd').val(), "HH:mm").format('X');
 
         console.log("Start : " + startTime + "\nEnd : " + stopTime);
-        console.log("Norty undefined pasedID : " + this.props.passedID);
+        console.log("Norty undefined pasedID : " + passedID);
 
         if (startTime!=null){
-            TimesCollectionAccess.update({_id: this.props.passedID},{$set:{
+            TimesCollectionAccess.update({_id: passedID},{$set:{
                     start_time: startTime
                 }
             });
         } if (stopTime!=null) {
-            TimesCollectionAccess.update({_id: this.props.passedID},{$set:{
+            TimesCollectionAccess.update({_id: passedID},{$set:{
                     stop_time: stopTime
                 }
             });
-        } if (category!=null){
-            TimesCollectionAccess.update({_id: this.props.passedID},{$set:{
-                    category: category
-                }
-            });
+        // } if (category!=null){
+        //     TimesCollectionAccess.update({_id: this.props.passedID},{$set:{
+        //             category: category
+        //         }
+        //     });
         } else {
             console.error("Update db was called, but nothing was updated dumb dumb!");
         }
@@ -90,7 +90,7 @@ export default class EditTime extends React.Component{
                 <input id="newTimeEnd" type="time" step="60" defaultValue={moment(currentEvent.stop_time*1000).format('HH:mm')}/>
 
                 <br/>
-                <button id="saveValuesBtn" onClick={ this.seeNewTime }>
+                <button id="saveValuesBtn" onClick={ () => this.seeNewTime(this.props.passedID) }>
                     Save
                 </button>
             </div>
