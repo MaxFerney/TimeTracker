@@ -48,8 +48,8 @@ export default class App extends React.Component{
 
             <Route
               key="EditTime"
-              path="/edit/:id"
-              exact 
+              path="/:id"
+              exact
               >
               <EditRouter />
             </Route>

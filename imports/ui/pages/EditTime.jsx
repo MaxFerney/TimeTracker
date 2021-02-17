@@ -80,6 +80,7 @@ export default class EditTime extends React.Component{
                 {console.log(JSON.stringify(currentEvent))}
                 <h2>{moment(currentEvent.start_time*1000).format('MMMM Do YYYY')}</h2>
                 <p>{moment(currentEvent.start_time*1000).format('LT') + " - " + moment(currentEvent.stop_time*1000).format('LT')}</p>
+                <p>{moment(currentEvent.start_time*1000).format()}</p>
 
                 <button>
                     <span id="editStart">Start</span>
