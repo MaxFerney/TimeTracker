@@ -48,7 +48,7 @@ export default class EditTime extends React.Component{
         });
 
         return (
-            <div>
+            <div id="editTimeContainer">
                 {console.log(JSON.stringify(currentEvent))}
                 <h2>{moment(currentEvent.start_time*1000).format('MMMM Do YYYY')}</h2>
                 <p>{moment(currentEvent.start_time*1000).format('LT') + " - " + moment(currentEvent.stop_time*1000).format('LT')}</p>
@@ -58,7 +58,9 @@ export default class EditTime extends React.Component{
                     <span id="editStop">Stop</span>
                 </button>
 
-                <input id="newTime" type="time" step="60"/>
+                <input id="newTimeStart" type="time" step="60"/>
+                <input type="netTimeEnd" type="time" step="60"/>
+
                 <br/>
                 <button id="saveValuesBtn">
                     Save
