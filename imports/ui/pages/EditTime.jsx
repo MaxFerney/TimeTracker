@@ -39,8 +39,8 @@ export default class EditTime extends React.Component{
         console.log('New start time: ' + moment($('#newTimeStart').val(), "HH:mm").format('X'));
         console.log('New end time: ' + moment($('#newTimeEnd').val(), "HH:mm").format('X'));
         //var oldDate = moment(oldTime.start_time*1000).format('MMMM Do YYYY');
-        var startTime = moment($('#newTimeStart').val()).format('X');
-        var stopTime = moment($('#newTimeEnd').val()).format('X');
+        var startTime = parseInt(moment($('#newTimeStart').val()).format('X'));
+        var stopTime = parseInt(moment($('#newTimeEnd').val()).format('X'));
 
         console.log("Start : " + startTime + "\tEnd : " + stopTime);
         console.log("Norty undefined pasedID : " + passedID);
@@ -80,15 +80,14 @@ export default class EditTime extends React.Component{
                 {console.log(JSON.stringify(currentEvent))}
                 <h2>{moment(currentEvent.start_time*1000).format('MMMM Do YYYY')}</h2>
                 <p>{moment(currentEvent.start_time*1000).format('LT') + " - " + moment(currentEvent.stop_time*1000).format('LT')}</p>
-                <p>{moment(currentEvent.start_time*1000).format()}</p>
 
                 <button>
                     <span id="editStart">Start</span>
                     <span id="editStop">Stop</span>
                 </button>
 
-                <input id="newTimeStart" type="datetime-local" step="60" defaultValue={moment(currentEvent.start_time*1000).format()}/>
-                <input id="newTimeEnd" type="datetime-local" step="60" defaultValue={moment(currentEvent.stop_time*1000).format()}/>
+                <input id="newTimeStart" type="datetime-local" step="60" defaultValue={moment(currentEvent.start_time*1000).format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>
+                <input id="newTimeEnd" type="datetime-local" step="60" defaultValue={moment(currentEvent.stop_time*1000).format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>
 
                 <br/>
                 <button id="saveValuesBtn" onClick={ () => this.seeNewTime(this.props.passedID, currentEvent) }>
