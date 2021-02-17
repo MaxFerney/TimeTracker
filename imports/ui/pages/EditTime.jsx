@@ -10,13 +10,7 @@ import Footer from './../components/footer.jsx';
 import Header from './../components/header.jsx';
 
 import { TimesCollectionAccess } from './../../../lib/times.js';
-/*
-$(document).on('ready', function() {
-    $("#saveValuesBtn").click(function() {
-        console.log('Updated');
-    })
-});
-*/
+
 export default class EditTime extends React.Component{
     updateDB(currentEvent, startTime=null, stopTime=null, category=null){
         //MAKE SURE TIMES ARE IN UNIX TIME (SECONDS)

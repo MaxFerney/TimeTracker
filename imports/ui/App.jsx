@@ -12,7 +12,7 @@ import TimeList from './pages/TimeList.jsx';
 import EditTime from './pages/EditTime.jsx';
 import Settings from './pages/Settings.jsx';
 
-function User() {
+function EditRouter() {
   let { id } = useParams();
   console.log("The id is: " + id);
   return(
@@ -21,17 +21,6 @@ function User() {
 }
 
 export default class App extends React.Component{
-  routeEditTimes(){
-    const listTimes = TimesCollectionAccess.find({},{sort: {start_time:-1}}).fetch().map((timeItem) =>
-      <Route
-          key={timeItem._id}
-          path={"/edit/"+timeItem.start_time}>
-          <EditTime passedTimeItem={timeItem}/>
-      </Route>
-    );
-    return listTimes;
-
-  }
   render(){
     return(
         <Router>
@@ -42,6 +31,7 @@ export default class App extends React.Component{
               exact >
               <Clock />
             </Route>
+
             <Route
               key="TimeList"
               path="/TimeList"
@@ -49,20 +39,19 @@ export default class App extends React.Component{
               <TimeList />
             </Route>
 
-            { this.routeEditTimes() }
-
             <Route
               key="Settings"
               path="/Settings"
               exact >
               <Settings />
             </Route>
+
             <Route
               key="EditTime"
               path="/edit/:id"
               exact 
               >
-              <User />
+              <EditRouter />
             </Route>
 
           </Switch>
