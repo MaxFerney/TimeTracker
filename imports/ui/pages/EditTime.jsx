@@ -4,13 +4,25 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 //import { useParams } from 'react-router-dom';
 
-import { useParams } from "react-router";
+import { useParams, useHistory, Redirect, BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
 import Footer from './../components/footer.jsx';
 import Header from './../components/header.jsx';
+import TimeList from './TimeList.jsx';
 
 import { TimesCollectionAccess } from './../../../lib/times.js';
 
+// function RedirectTimeList(){
+//     let history = useHistory();
+//     function goHome(){
+//         console.log("")
+//         history.push("/TimeList");
+//
+//     }
+//     return(
+//
+//     );
+// }
 export default class EditTime extends React.Component{
 /*
     updateDB(startTime=null, stopTime=null, category=null){
@@ -36,14 +48,15 @@ export default class EditTime extends React.Component{
     }
 */
     seeNewTime(passedID, oldTime) {
-        console.log('New start time: ' + moment($('#newTimeStart').val(), "HH:mm").format('X'));
-        console.log('New end time: ' + moment($('#newTimeEnd').val(), "HH:mm").format('X'));
+
+        // console.log('New start time: ' + moment($('#newTimeStart').val(), "HH:mm").format('X'));
+        // console.log('New end time: ' + moment($('#newTimeEnd').val(), "HH:mm").format('X'));
         //var oldDate = moment(oldTime.start_time*1000).format('MMMM Do YYYY');
         var startTime = parseInt(moment($('#newTimeStart').val()).format('X'));
         var stopTime = parseInt(moment($('#newTimeEnd').val()).format('X'));
 
-        console.log("Start : " + startTime + "\tEnd : " + stopTime);
-        console.log("Norty undefined pasedID : " + passedID);
+        // console.log("Start : " + startTime + "\tEnd : " + stopTime);
+        // console.log("Norty undefined pasedID : " + passedID);
 
         if (startTime!=null){
             TimesCollectionAccess.update({_id: passedID},{$set:{
@@ -63,6 +76,9 @@ export default class EditTime extends React.Component{
         } else {
             console.error("Update db was called, but nothing was updated dumb dumb!");
         }
+        // return(
+        //     <TimeList />
+        // );
     }
 
     getData() {
