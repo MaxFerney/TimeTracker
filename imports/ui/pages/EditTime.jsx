@@ -35,14 +35,14 @@ export default class EditTime extends React.Component{
         }
     }
 */
-    seeNewTime(passedID) {
+    seeNewTime(passedID, oldTime) {
         console.log('New start time: ' + moment($('#newTimeStart').val(), "HH:mm").format('X'));
         console.log('New end time: ' + moment($('#newTimeEnd').val(), "HH:mm").format('X'));
+        //var oldDate = moment(oldTime.start_time*1000).format('MMMM Do YYYY');
+        var startTime = moment($('#newTimeStart').val()).format('X');
+        var stopTime = moment($('#newTimeEnd').val()).format('X');
 
-        var startTime = moment($('#newTimeStart').val(), "HH:mm").format('X');
-        var stopTime = moment($('#newTimeEnd').val(), "HH:mm").format('X');
-
-        console.log("Start : " + startTime + "\nEnd : " + stopTime);
+        console.log("Start : " + startTime + "\tEnd : " + stopTime);
         console.log("Norty undefined pasedID : " + passedID);
 
         if (startTime!=null){
@@ -86,11 +86,11 @@ export default class EditTime extends React.Component{
                     <span id="editStop">Stop</span>
                 </button>
 
-                <input id="newTimeStart" type="time" step="60" defaultValue={moment(currentEvent.start_time*1000).format('HH:mm')}/>
-                <input id="newTimeEnd" type="time" step="60" defaultValue={moment(currentEvent.stop_time*1000).format('HH:mm')}/>
+                <input id="newTimeStart" type="datetime-local" step="60" defaultValue={moment(currentEvent.start_time*1000).format()}/>
+                <input id="newTimeEnd" type="datetime-local" step="60" defaultValue={moment(currentEvent.stop_time*1000).format()}/>
 
                 <br/>
-                <button id="saveValuesBtn" onClick={ () => this.seeNewTime(this.props.passedID) }>
+                <button id="saveValuesBtn" onClick={ () => this.seeNewTime(this.props.passedID, currentEvent) }>
                     Save
                 </button>
             </div>
