@@ -51,9 +51,7 @@ export default class CreateTime extends React.Component{
             category: category,
             is_active: false
         });
-        // return(
-        //     <TimeList />
-        // );
+            alert('New Time Added!')
     }
 
     getData() {
