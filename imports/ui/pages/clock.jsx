@@ -71,8 +71,8 @@ export default class Clock extends React.Component {
   }
 
   pushTimerBtn() {
-    $('#manuallyInsertBtn').fadeToggle();
     $('#categorySelection').fadeToggle();
+    $('#manuallyInsertBtn').fadeToggle();
 
     if (timerStarted == false) {
       bgColor='redBG';
@@ -133,6 +133,9 @@ export default class Clock extends React.Component {
         <button id="startStopBtn" className={"dropShadow " + bgColor} onClick={ this.pushTimerBtn }>
             {buttonText}
         </button>
+        {this.renderCategories()}
+        <br/>
+        <br/>
         <NavLink to="/CreateTime" id="manuallyInsertBtn" className="dropShadow tanBG">
           Manually Insert Time
         </NavLink>
