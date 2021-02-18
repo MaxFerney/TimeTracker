@@ -66,9 +66,16 @@ export default class Clock extends React.Component {
       bgColor='redBG';
       //checkAndFixDeadTimes();
       // var query = TimesCollectionAccess.find({is_active:true})
+      var badTime = false;
       TimesCollectionAccess.find({is_active:true}).fetch().map((deadTime) => {
          TimesCollectionAccess.remove({_id:deadTime._id});
+         badTime = true;
       });
+
+      if(badTime) {
+        alert('It seems you closed the app while a timer was running. Please leave it open in the background for the timer to work.')
+      }
+
       // TimesCollectionAccess.remove(query);
       startTime = currentTime;
       endTime = "Waiting..."
