@@ -12,7 +12,7 @@ import { TimesCollectionAccess } from './../../../lib/times.js';
 export default class TimeList extends React.Component{
   datesAvaliable(){
     var dates = [];
-    TimesCollectionAccess.find({},{sort: {start_time:-1}}).fetch().map((timeItem) => {
+    TimesCollectionAccess.find({is_active:false},{sort: {start_time:-1}}).fetch().map((timeItem) => {
       var date=moment(timeItem.start_time*1000).format("MMMM Do YYYY");
       //console.log("DATE: "+date);
       //console.log("DATE IN DATES: "+dates.indexOf(date) > -1);
@@ -39,7 +39,7 @@ export default class TimeList extends React.Component{
     );
   }
   renderTimesInDate(date){
-    const allTimesInDate = TimesCollectionAccess.find({},{sort: {start_time:-1}}).fetch().map((timeItem) =>{
+    const allTimesInDate = TimesCollectionAccess.find({is_active:false},{sort: {start_time:-1}}).fetch().map((timeItem) =>{
       var currentDate = moment(timeItem.start_time*1000).format("MMMM Do YYYY");
       if (currentDate == date){
         return(this.renderTimeItem(timeItem));
