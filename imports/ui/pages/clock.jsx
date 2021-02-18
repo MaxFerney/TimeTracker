@@ -21,6 +21,7 @@ var buttonText;
 timerStarted = false;
 elapsedTime = 0;
 buttonText = "Start";
+bgColor = "greenBG";
 
 
 export default class Clock extends React.Component {
@@ -71,9 +72,10 @@ export default class Clock extends React.Component {
 
   pushTimerBtn() {
     $('#manuallyInsertBtn').fadeToggle();
+    $('#categorySelection').fadeToggle();
 
     if (timerStarted == false) {
-      $('#startStopBtn').removeClass('greenBG').addClass('redBG');
+      bgColor='redBG';
 
       //checkAndFixDeadTimes();
       this.removeDeadTimes;
@@ -84,12 +86,14 @@ export default class Clock extends React.Component {
       TimesCollectionAccess.insert({
         start_time: currentTime,
         stop_time: 0,
+        category: $('#categorySelection').val(),
         is_active: true,
       });
-      $('#startStopBtn').removeClass('greenBG').addClass('redBG');
+      bgColor='redBG';
       timeObject = TimesCollectionAccess.findOne({is_active: true});
     } else {
-      $('#startStopBtn').removeClass('redBG').addClass('greenBG');
+
+      bgColor='greenBG';
       endTime = currentTime;
       buttonText = "Start";
       timerStarted = false;
@@ -100,12 +104,11 @@ export default class Clock extends React.Component {
       TimesCollectionAccess.update({_id:timeObject._id},{
         $set:{
         stop_time:currentTime,
-        category: $('#categorySelection').val(),
         is_active:false,
       }});
 
 
-      $('#startStopBtn').removeClass('redBG').addClass('greenBG');
+      bgColor='greenBG';
     }
     return;
   }
@@ -127,8 +130,7 @@ export default class Clock extends React.Component {
         <h2>Welcome Back <br/> <span id="userName">User X</span></h2>
         <h2>{moment().format('LTS')}</h2>
         <h1>{moment(ESTCurrentTimeFix + elapsedTime*1000).format('HH:mm:ss')}</h1>
-        {this.renderCategories()}
-        <button id="startStopBtn" className="dropShadow greenBG" onClick={ this.pushTimerBtn }>
+        <button id="startStopBtn" className={"dropShadow " + bgColor} onClick={ this.pushTimerBtn }>
             {buttonText}
         </button>
         <NavLink to="/CreateTime" id="manuallyInsertBtn" className="dropShadow tanBG">
