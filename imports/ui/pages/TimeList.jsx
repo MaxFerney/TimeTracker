@@ -14,8 +14,6 @@ export default class TimeList extends React.Component{
     var dates = [];
     TimesCollectionAccess.find({is_active:false},{sort: {start_time:-1}}).fetch().map((timeItem) => {
       var date=moment(timeItem.start_time*1000).format("MMMM Do YYYY");
-      //console.log("DATE: "+date);
-      //console.log("DATE IN DATES: "+dates.indexOf(date) > -1);
       if(!(dates.indexOf(date) > -1)){
         dates.push(date);
       }
@@ -67,6 +65,9 @@ export default class TimeList extends React.Component{
          </Helmet>
          <Header />
          <h2>Time Log</h2>
+         <NavLink to="/CreateTime" id="manuallyInsertBtn" className="dropShadow greenBG">
+           Manually Insert Time
+         </NavLink>
          <hr/>
          <div className="times">
             { this.renderTimeList() }

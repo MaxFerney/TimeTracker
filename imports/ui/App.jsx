@@ -22,12 +22,10 @@ const allCategories = [
 
 function EditRouter() {
   let { id } = useParams();
-  console.log("The id is: " + id);
   return(
     <EditTime passedID={id} categories={allCategories} />
   )
 }
-
 
 export default class App extends React.Component{
   render(){
@@ -74,9 +72,3 @@ export default class App extends React.Component{
     );
   }
 }
-// <Route
-//   key="Edit"
-//   path="/edit/:id"
-//   exact >
-//   <EditTime />
-// </Route>

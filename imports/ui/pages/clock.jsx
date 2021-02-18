@@ -6,15 +6,13 @@ import { TimesCollectionAccess } from '../../../lib/times.js';
 import Footer from '../components/footer.jsx';
 import Header from '../components/header.jsx';
 
-//a change
-
 const ESTCurrentTimeFix = 18000000;
 
-var timerStarted; //Eventually pull from DB
+var timerStarted;
 var startTime;
 var endTime;
 var currentTime;
-var elapsedTime; //Eventually pull from DB
+var elapsedTime;
 var timeObject;
 var buttonText;
 
@@ -60,12 +58,10 @@ export default class Clock extends React.Component {
 
   pushTimerBtn() {
     $('#categorySelection').fadeToggle();
-    $('#manuallyInsertBtn').fadeToggle();
 
     if (timerStarted == false) {
       bgColor='redBG';
-      //checkAndFixDeadTimes();
-      // var query = TimesCollectionAccess.find({is_active:true})
+
       var badTime = false;
       TimesCollectionAccess.find({is_active:true}).fetch().map((deadTime) => {
          TimesCollectionAccess.remove({_id:deadTime._id});
@@ -76,7 +72,6 @@ export default class Clock extends React.Component {
         alert('It seems you closed the app while a timer was running. Please leave it open in the background for the timer to work.')
       }
 
-      // TimesCollectionAccess.remove(query);
       startTime = currentTime;
       endTime = "Waiting..."
       buttonText = "Stop";
@@ -96,9 +91,7 @@ export default class Clock extends React.Component {
       buttonText = "Start";
       timerStarted = false;
 
-      // findAndUpdate();
       timeObject = TimesCollectionAccess.findOne({is_active:true})
-       //console.log("added item to DB");
       TimesCollectionAccess.update({_id:timeObject._id},{
         $set:{
         stop_time:currentTime,
@@ -113,19 +106,18 @@ export default class Clock extends React.Component {
 
   FormattedDate(props) {
       //runs each tick
-    //console.log(props);
     currentTime = Math.floor(props.getTime()/1000);
     if(timerStarted == true) {
       elapsedTime = currentTime - startTime;
     } else if(endTime) {
       elapsedTime = endTime - startTime;
     } else {
-      elapsedTime = 0; //Eventually Pull from DB
+      elapsedTime = 0;
     }
 
     return (
       <div id="homeTimer">
-        <h2>Welcome Back <br/> <span id="userName">Michael</span></h2>
+        <h2>Welcome Back <br/> <span id="userName">Gerry</span></h2>
         <h2>{moment().format('LTS')}</h2>
         <h1>{moment(ESTCurrentTimeFix + elapsedTime*1000).format('HH:mm:ss')}</h1>
         <button id="startStopBtn" className={"dropShadow " + bgColor} onClick={ this.pushTimerBtn }>
@@ -134,9 +126,7 @@ export default class Clock extends React.Component {
         {this.renderCategories()}
         <br/>
         <br/>
-        <NavLink to="/CreateTime" id="manuallyInsertBtn" className="dropShadow tanBG">
-          Manually Insert Time
-        </NavLink>
+
       </div>
     );
   }

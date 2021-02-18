@@ -12,17 +12,6 @@ import TimeList from './TimeList.jsx';
 
 import { TimesCollectionAccess } from './../../../lib/times.js';
 
-// function RedirectTimeList(){
-//     let history = useHistory();
-//     function goHome(){
-//         console.log("")
-//         history.push("/TimeList");
-//
-//     }
-//     return(
-//
-//     );
-// }
 export default class CreateTime extends React.Component{
 
     renderCategories(default_category="Work"){
@@ -40,7 +29,6 @@ export default class CreateTime extends React.Component{
         );
     }
     seeNewTime() {
-
         var startTime = parseInt(moment($('#newTimeStart').val()).format('X'));
         var stopTime = parseInt(moment($('#newTimeEnd').val()).format('X'));
         var category = $('#categorySelection').val();
@@ -55,23 +43,15 @@ export default class CreateTime extends React.Component{
     }
 
     getData() {
-        //console.log(this.props.passedID);
-
-
         return (
             <div id="editTimeContainer">
-
                 <h2 id="addNewTimeHeader">Add New Time</h2>
-
                 <p>Start Time</p>
                 <input id="newTimeStart" type="datetime-local" class="tanBG"/>
-
                 <p>End Time</p>
                 <input id="newTimeEnd" type="datetime-local" class="tanBG"/>
-
                 <p>Category</p>
                 { this.renderCategories("Work") }
-
                 <br/>
                 <button id="saveValuesBtn" class="greenBG" onClick={ () => this.seeNewTime() }>
                     Save
@@ -87,16 +67,9 @@ export default class CreateTime extends React.Component{
                     <title>Create Time</title>
                 </Helmet>
                 <Header />
-
                 {this.getData()}
-
                 <Footer />
            </div>
         );
     }
 }
-/*
-EditTime.propTypes = {
-    timeItem: PropTypes.object.isRequired,
-};
-*/

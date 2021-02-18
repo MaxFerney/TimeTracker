@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {Helmet} from "react-helmet";
 import PropTypes from 'prop-types';
 import moment from 'moment';
-//import { useParams } from 'react-router-dom';
 
 import { useParams, useHistory, Redirect, BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
@@ -12,17 +11,6 @@ import TimeList from './TimeList.jsx';
 
 import { TimesCollectionAccess } from './../../../lib/times.js';
 
-// function RedirectTimeList(){
-//     let history = useHistory();
-//     function goHome(){
-//         console.log("")
-//         history.push("/TimeList");
-//
-//     }
-//     return(
-//
-//     );
-// }
 export default class EditTime extends React.Component{
 
     renderCategories(default_category="Work"){
@@ -51,7 +39,7 @@ export default class EditTime extends React.Component{
                     start_time: startTime
                 }
             });
-            
+
             editStart = true;
         } if (stopTime!=null) {
             TimesCollectionAccess.update({_id: passedID},{$set:{
@@ -82,7 +70,6 @@ export default class EditTime extends React.Component{
     }
 
     getData() {
-        //console.log(this.props.passedID);
 
         let currentEvent;
         let passedID = this.props.passedID;
@@ -94,7 +81,6 @@ export default class EditTime extends React.Component{
 
         return (
             <div id="editTimeContainer">
-                {console.log(JSON.stringify(currentEvent))}
                 <h2>{moment(currentEvent.start_time*1000).format('MMMM Do YYYY')}</h2>
                 <p>{moment(currentEvent.start_time*1000).format('LT') + " - " + moment(currentEvent.stop_time*1000).format('LT')}</p>
                 <hr/>
@@ -104,7 +90,7 @@ export default class EditTime extends React.Component{
 
                 <p>End Time</p>
                 <input id="newTimeEnd" class="tanBG" type="datetime-local" defaultValue={moment(currentEvent.stop_time*1000).format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>
-                
+
                 <p>Category</p>
                 { this.renderCategories(currentEvent.category) }
 
@@ -131,8 +117,3 @@ export default class EditTime extends React.Component{
         );
     }
 }
-/*
-EditTime.propTypes = {
-    timeItem: PropTypes.object.isRequired,
-};
-*/
