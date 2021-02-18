@@ -11,6 +11,7 @@ import Clock from './pages/clock.jsx';
 import TimeList from './pages/TimeList.jsx';
 import EditTime from './pages/EditTime.jsx';
 import Settings from './pages/Settings.jsx';
+import CreateTime from './pages/CreateTime.jsx';
 
 const allCategories = [
     'Work',
@@ -26,6 +27,7 @@ function EditRouter() {
     <EditTime passedID={id} categories={allCategories} />
   )
 }
+
 
 export default class App extends React.Component{
   render(){
@@ -54,10 +56,16 @@ export default class App extends React.Component{
             </Route>
 
             <Route
+              key="CreateTime"
+              path="/CreateTime"
+              exact >
+              <CreateTime />
+            </Route>
+
+            <Route
               key="EditTime"
               path="/:id"
-              exact
-              >
+              exact >
               <EditRouter />
             </Route>
 
