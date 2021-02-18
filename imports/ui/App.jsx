@@ -59,7 +59,7 @@ export default class App extends React.Component{
               key="CreateTime"
               path="/CreateTime"
               exact >
-              <CreateTime />
+              <CreateTime categories={allCategories} />
             </Route>
 
             <Route

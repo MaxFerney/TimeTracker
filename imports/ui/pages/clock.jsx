@@ -101,6 +101,7 @@ export default class Clock extends React.Component {
       TimesCollectionAccess.update({_id:timeObject._id},{
         $set:{
         stop_time:currentTime,
+        category: $('#categorySelection').val(),
         is_active:false,
       }});
 
@@ -133,9 +134,7 @@ export default class Clock extends React.Component {
         <button id="manuallyInsertBtn" className="dropShadow tanBG">
           Manually Insert Time
         </button>
-        <div>
-            {this.renderCategories()}
-        </div>
+        {this.renderCategories()}
       </div>
     );
   }
