@@ -78,10 +78,11 @@ export default class EditTime extends React.Component{
 
     getData() {
         //console.log(this.props.passedID);
-        let currentEvent;
 
-        TimesCollectionAccess.find({_id: this.props.passedID}).fetch().map((item) => {
-            if(item._id == this.props.passedID) {
+        let currentEvent;
+        let passedID = this.props.passedID;
+        TimesCollectionAccess.find({_id: passedID}).fetch().map((item) => {
+            if(item._id == passedID) {
                 currentEvent = item;
             }
         });
@@ -102,7 +103,7 @@ export default class EditTime extends React.Component{
                 { this.renderCategories(currentEvent.category) }
 
                 <br/>
-                <button id="saveValuesBtn" onClick={ () => this.seeNewTime(this.props.passedID, currentEvent) }>
+                <button id="saveValuesBtn" onClick={ () => this.seeNewTime(passedID, currentEvent) }>
                     Save
                 </button>
             </div>
