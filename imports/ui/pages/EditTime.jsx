@@ -76,7 +76,7 @@ export default class EditTime extends React.Component{
         //Using editStart - editEnd - editCat
 
         if (editStart && editEnd && editCat) {
-            alert('Tims and category have been updated!');
+            alert('Times and category have been updated!');
         }
 
     }
