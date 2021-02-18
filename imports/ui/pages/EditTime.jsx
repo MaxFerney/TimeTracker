@@ -39,39 +39,46 @@ export default class EditTime extends React.Component{
             </select>
         );
     }
-    seeNewTime(passedID, oldTime) {
-
-        // console.log('New start time: ' + moment($('#newTimeStart').val(), "HH:mm").format('X'));
-        // console.log('New end time: ' + moment($('#newTimeEnd').val(), "HH:mm").format('X'));
-
+    seeNewTime(passedID) {
         var startTime = parseInt(moment($('#newTimeStart').val()).format('X'));
         var stopTime = parseInt(moment($('#newTimeEnd').val()).format('X'));
         var category = $('#categorySelection').val();
 
-        // console.log("Start : " + startTime + "\tEnd : " + stopTime);
-        // console.log("Norty undefined pasedID : " + passedID);
+        var editStart, editEnd, editCat = false;
 
         if (startTime!=null){
             TimesCollectionAccess.update({_id: passedID},{$set:{
                     start_time: startTime
                 }
             });
+            
+            editStart = true;
         } if (stopTime!=null) {
             TimesCollectionAccess.update({_id: passedID},{$set:{
                     stop_time: stopTime
                 }
             });
+
+            editEnd = true;
         } if (category!=null){
             TimesCollectionAccess.update({_id: passedID},{$set:{
                     category: category
                 }
             });
+
+            editCat = true;
         } else {
             console.error("Update db was called, but nothing was updated dumb dumb!");
         }
-        // return(
-        //     <TimeList />
-        // );
+
+        var alertMess = null;
+
+        //Using editStart - editEnd - editCat
+
+        if (editStart && editEnd && editCat) {
+            alert('Tims and category have been updated!');
+        }
+
     }
 
     getData() {
