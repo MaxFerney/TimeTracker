@@ -84,7 +84,6 @@ export default class Clock extends React.Component {
       TimesCollectionAccess.insert({
         start_time: currentTime,
         stop_time: 0,
-        category: $('#categorySelection').val(),
         is_active: true,
       });
       $('#startStopBtn').removeClass('greenBG').addClass('redBG');
@@ -132,9 +131,10 @@ export default class Clock extends React.Component {
         <button id="startStopBtn" className="dropShadow greenBG" onClick={ this.pushTimerBtn }>
             {buttonText}
         </button>
-        <button id="manuallyInsertBtn" className="dropShadow tanBG">
+        <NavLink to="/CreateTime" id="manuallyInsertBtn" className="dropShadow tanBG">
           Manually Insert Time
-        </button>
+        </NavLink>
+        {this.renderCategories()}
       </div>
     );
   }
