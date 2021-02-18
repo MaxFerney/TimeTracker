@@ -125,7 +125,7 @@ export default class Clock extends React.Component {
 
     return (
       <div id="homeTimer">
-        <h2>Welcome Back <br/> <span id="userName">User X</span></h2>
+        <h2>Welcome Back <br/> <span id="userName">Michael</span></h2>
         <h2>{moment().format('LTS')}</h2>
         <h1>{moment(ESTCurrentTimeFix + elapsedTime*1000).format('HH:mm:ss')}</h1>
         <button id="startStopBtn" className={"dropShadow " + bgColor} onClick={ this.pushTimerBtn }>
