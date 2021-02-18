@@ -58,18 +58,6 @@ export default class Clock extends React.Component {
     );
   }
 
-  removeDeadTimes(){
-
-    // var oldTimeObject = TimesCollectionAccess.findOne({is_active:true});
-    // if (oldTimeObject != undefined){ //If there is live timer abandonded
-    //   TimesCollectionAccess.remove({_id:oldTimeObject._id});
-    //   console.log("deleted an old time: "+oldTimeObject._id);
-    //   var oldTimeObject = TimesCollectionAccess.findOne({is_active:true});
-    //   alert('You previously closed the app with the timer running, please leave the app open in the background to track your time.');
-    // }
-    //console.log("fixed all dead times!");
-    return;
-  }
 
   pushTimerBtn() {
     $('#categorySelection').fadeToggle();
@@ -77,9 +65,11 @@ export default class Clock extends React.Component {
 
     if (timerStarted == false) {
       bgColor='redBG';
-
       //checkAndFixDeadTimes();
       // var query = TimesCollectionAccess.find({is_active:true})
+      TimesCollectionAccess.find({is_active:true}).fetch().map((deadTime) => {
+         TimesCollectionAccess.remove({_id:deadTime._id});
+      });
       // TimesCollectionAccess.remove(query);
       startTime = currentTime;
       endTime = "Waiting..."
