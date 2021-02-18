@@ -20,9 +20,6 @@ export default class TimeList extends React.Component{
         dates.push(date);
       }
     });
-    dates.forEach((item, i) => {
-      //console.log(item);
-    });
 
     return(
       dates
