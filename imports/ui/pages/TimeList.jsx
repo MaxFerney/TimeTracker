@@ -67,6 +67,7 @@ export default class TimeList extends React.Component{
          </Helmet>
          <Header />
          <h2>Time Log</h2>
+         <hr/>
          <div className="times">
             { this.renderTimeList() }
          </div>
