@@ -51,7 +51,7 @@ export default class Clock extends React.Component {
         <option value={category}>{category}</option>
     );
     return (
-        <select name="categories" id="categorySelection">
+        <select name="categories" id="categorySelection" class="tanBG dropShadow" >
             {mappedCategories}
         </select>
     );
@@ -128,13 +128,13 @@ export default class Clock extends React.Component {
         <h2>Welcome Back <br/> <span id="userName">User X</span></h2>
         <h2>{moment().format('LTS')}</h2>
         <h1>{moment(ESTCurrentTimeFix + elapsedTime*1000).format('HH:mm:ss')}</h1>
+        {this.renderCategories()}
         <button id="startStopBtn" className="dropShadow greenBG" onClick={ this.pushTimerBtn }>
             {buttonText}
         </button>
         <button id="manuallyInsertBtn" className="dropShadow tanBG">
           Manually Insert Time
         </button>
-        {this.renderCategories()}
       </div>
     );
   }

@@ -34,10 +34,8 @@ export default class EditTime extends React.Component{
             }
         });
         return (
-          <select
-            name="categories"
-            id="categorySelection">
-            {mappedCategories}
+             <select name="categories" id="categorySelection" class="tanBG">
+                {mappedCategories}
             </select>
         );
     }
@@ -93,17 +91,17 @@ export default class EditTime extends React.Component{
                 <h2>{moment(currentEvent.start_time*1000).format('MMMM Do YYYY')}</h2>
                 <p>{moment(currentEvent.start_time*1000).format('LT') + " - " + moment(currentEvent.stop_time*1000).format('LT')}</p>
 
-                <button>
-                    <span id="editStart">Start</span>
-                    <span id="editStop">Stop</span>
-                </button>
+                <p>Start Time</p>
+                <input id="newTimeStart" class="tanBG" type="datetime-local" defaultValue={moment(currentEvent.start_time*1000).format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>
 
-                <input id="newTimeStart" type="datetime-local" defaultValue={moment(currentEvent.start_time*1000).format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>
-                <input id="newTimeEnd" type="datetime-local" defaultValue={moment(currentEvent.stop_time*1000).format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>
+                <p>End Time</p>
+                <input id="newTimeEnd" class="tanBG" type="datetime-local" defaultValue={moment(currentEvent.stop_time*1000).format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>
+                
+                <br/>
                 { this.renderCategories(currentEvent.category) }
 
                 <br/>
-                <button id="saveValuesBtn" onClick={ () => this.seeNewTime(passedID, currentEvent) }>
+                <button id="saveValuesBtn" class="greenBG" onClick={ () => this.seeNewTime(passedID, currentEvent) }>
                     Save
                 </button>
             </div>
