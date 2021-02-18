@@ -134,7 +134,6 @@ export default class Clock extends React.Component {
         <NavLink to="/CreateTime" id="manuallyInsertBtn" className="dropShadow tanBG">
           Manually Insert Time
         </NavLink>
-        {this.renderCategories()}
       </div>
     );
   }

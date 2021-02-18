@@ -90,6 +90,7 @@ export default class EditTime extends React.Component{
                 {console.log(JSON.stringify(currentEvent))}
                 <h2>{moment(currentEvent.start_time*1000).format('MMMM Do YYYY')}</h2>
                 <p>{moment(currentEvent.start_time*1000).format('LT') + " - " + moment(currentEvent.stop_time*1000).format('LT')}</p>
+                <hr/>
 
                 <p>Start Time</p>
                 <input id="newTimeStart" class="tanBG" type="datetime-local" defaultValue={moment(currentEvent.start_time*1000).format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>
@@ -97,7 +98,7 @@ export default class EditTime extends React.Component{
                 <p>End Time</p>
                 <input id="newTimeEnd" class="tanBG" type="datetime-local" defaultValue={moment(currentEvent.stop_time*1000).format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>
                 
-                <br/>
+                <p>Category</p>
                 { this.renderCategories(currentEvent.category) }
 
                 <br/>
