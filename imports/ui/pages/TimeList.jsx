@@ -33,7 +33,7 @@ export default class TimeList extends React.Component{
       <div key={timeItem._id} className="timeDetails">
         <NavLink to={"/" + timeItem._id}>
           <p>{start = moment(timeItem.start_time*1000).format('LT')} - {moment(timeItem.stop_time*1000).format('LT')}</p>
-          <p>Placeholder Category</p>
+          <p>{timeItem.category}</p>
         </NavLink>
       </div>
     );

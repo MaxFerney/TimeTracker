@@ -46,6 +46,17 @@ export default class Clock extends React.Component {
     });
   }
 
+  renderCategories(){
+    var mappedCategories = this.props.categories.map((category) =>
+        <option value={category}>{category}</option>
+    );
+    return (
+        <select name="categories" id="categorySelection">
+            {mappedCategories}
+        </select>
+    );
+  }
+
   removeDeadTimes(){
     var oldTimeObject = TimesCollectionAccess.findOne({is_active:true});
     if (oldTimeObject != undefined){ //If there is live timer abandonded
@@ -66,7 +77,6 @@ export default class Clock extends React.Component {
 
       //checkAndFixDeadTimes();
       this.removeDeadTimes;
-
       startTime = currentTime;
       endTime = "Waiting..."
       buttonText = "Stop";
@@ -74,7 +84,7 @@ export default class Clock extends React.Component {
       TimesCollectionAccess.insert({
         start_time: currentTime,
         stop_time: 0,
-        category: "placeholder",
+        category: $('#categorySelection').val(),
         is_active: true,
       });
       $('#startStopBtn').removeClass('greenBG').addClass('redBG');
@@ -123,6 +133,9 @@ export default class Clock extends React.Component {
         <button id="manuallyInsertBtn" className="dropShadow tanBG">
           Manually Insert Time
         </button>
+        <div>
+            {this.renderCategories()}
+        </div>
       </div>
     );
   }

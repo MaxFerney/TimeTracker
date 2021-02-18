@@ -24,36 +24,31 @@ import { TimesCollectionAccess } from './../../../lib/times.js';
 //     );
 // }
 export default class EditTime extends React.Component{
-/*
-    updateDB(startTime=null, stopTime=null, category=null){
-        //MAKE SURE TIMES ARE IN UNIX TIME (SECONDS)
-        if (startTime!=null){
-            TimesCollectionAccess.update({_id: this.props.passedID},{$set:{
-                    start_time: startTime
-                }
-            });
-        } if (stopTime!=null) {
-            TimesCollectionAccess.update({_id: this.props.passedID},{$set:{
-                    stop_time: stopTime
-                }
-            });
-        } if (category!=null){
-            TimesCollectionAccess.update({_id: this.props.passedID},{$set:{
-                    category: category
-                }
-            });
-        } else {
-            console.error("Update db was called, but nothing was updated dumb dumb!");
-        }
+
+    renderCategories(default_category="Work"){
+        var mappedCategories = this.props.categories.map((category) => {
+            if (category==default_category){
+                return(<option selected value={category}>{category}</option>);
+            } else {
+                return(<option value={category}>{category}</option>);
+            }
+        });
+        return (
+          <select
+            name="categories"
+            id="categorySelection">
+            {mappedCategories}
+            </select>
+        );
     }
-*/
     seeNewTime(passedID, oldTime) {
 
         // console.log('New start time: ' + moment($('#newTimeStart').val(), "HH:mm").format('X'));
         // console.log('New end time: ' + moment($('#newTimeEnd').val(), "HH:mm").format('X'));
-        //var oldDate = moment(oldTime.start_time*1000).format('MMMM Do YYYY');
+
         var startTime = parseInt(moment($('#newTimeStart').val()).format('X'));
         var stopTime = parseInt(moment($('#newTimeEnd').val()).format('X'));
+        var category = $('#categorySelection').val();
 
         // console.log("Start : " + startTime + "\tEnd : " + stopTime);
         // console.log("Norty undefined pasedID : " + passedID);
@@ -68,11 +63,11 @@ export default class EditTime extends React.Component{
                     stop_time: stopTime
                 }
             });
-        // } if (category!=null){
-        //     TimesCollectionAccess.update({_id: this.props.passedID},{$set:{
-        //             category: category
-        //         }
-        //     });
+        } if (category!=null){
+            TimesCollectionAccess.update({_id: passedID},{$set:{
+                    category: category
+                }
+            });
         } else {
             console.error("Update db was called, but nothing was updated dumb dumb!");
         }
@@ -102,8 +97,9 @@ export default class EditTime extends React.Component{
                     <span id="editStop">Stop</span>
                 </button>
 
-                <input id="newTimeStart" type="datetime-local" step="60" defaultValue={moment(currentEvent.start_time*1000).format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>
-                <input id="newTimeEnd" type="datetime-local" step="60" defaultValue={moment(currentEvent.stop_time*1000).format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>
+                <input id="newTimeStart" type="datetime-local" defaultValue={moment(currentEvent.start_time*1000).format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>
+                <input id="newTimeEnd" type="datetime-local" defaultValue={moment(currentEvent.stop_time*1000).format('YYYY[-]MM[-]DD[T]HH[:]mm')}/>
+                { this.renderCategories(currentEvent.category) }
 
                 <br/>
                 <button id="saveValuesBtn" onClick={ () => this.seeNewTime(this.props.passedID, currentEvent) }>
