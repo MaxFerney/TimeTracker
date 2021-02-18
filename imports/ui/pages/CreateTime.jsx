@@ -34,10 +34,8 @@ export default class CreateTime extends React.Component{
             }
         });
         return (
-          <select
-            name="categories"
-            id="categorySelection">
-            {mappedCategories}
+            <select name="categories" id="categorySelection" class="tanBG" >
+                {mappedCategories}
             </select>
         );
     }
@@ -65,12 +63,19 @@ export default class CreateTime extends React.Component{
         return (
             <div id="editTimeContainer">
 
-                <input id="newTimeStart" type="datetime-local"/>
-                <input id="newTimeEnd" type="datetime-local"/>
+                <h2 id="addNewTimeHeader">Add New Time</h2>
+
+                <p>Start Time</p>
+                <input id="newTimeStart" type="datetime-local" class="tanBG"/>
+
+                <p>End Time</p>
+                <input id="newTimeEnd" type="datetime-local" class="tanBG"/>
+
+                <p>Category</p>
                 { this.renderCategories("Work") }
 
                 <br/>
-                <button id="saveValuesBtn" onClick={ () => this.seeNewTime() }>
+                <button id="saveValuesBtn" class="greenBG" onClick={ () => this.seeNewTime() }>
                     Save
                 </button>
             </div>
